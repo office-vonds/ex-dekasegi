@@ -262,12 +262,116 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
   padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-right:4px;
 }
 
+/* ========== FLOATING CHAT BOT ========== */
+.chat-fab{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  color:#fff;border:none;cursor:pointer;
+  box-shadow:0 10px 30px rgba(255,0,132,0.45);
+  font-size:28px;display:flex;align-items:center;justify-content:center;
+  transition:transform 0.2s;
+}
+.chat-fab:hover{transform:scale(1.08)}
+.chat-fab .badge{
+  position:absolute;top:-4px;right:-4px;
+  background:#ff3366;color:#fff;border-radius:999px;
+  font-size:11px;padding:2px 7px;font-weight:900;
+  border:2px solid #fff;
+}
+.chat-window{
+  position:fixed;bottom:100px;right:24px;z-index:201;
+  width:360px;max-width:calc(100vw - 32px);
+  height:520px;max-height:calc(100vh - 140px);
+  background:#fff;border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  display:none;flex-direction:column;overflow:hidden;
+  border:1px solid var(--line);
+}
+.chat-window.open{display:flex}
+.chat-header{
+  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  color:#fff;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.chat-header .h-title{font-weight:900;font-size:15px}
+.chat-header .h-sub{font-size:11px;opacity:0.9;margin-top:2px}
+.chat-header .h-close{
+  background:rgba(255,255,255,0.2);border:none;color:#fff;
+  width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:18px;
+}
+.chat-body{
+  flex:1;overflow-y:auto;padding:18px;background:#fdf5f9;
+  display:flex;flex-direction:column;gap:10px;
+}
+.chat-msg{
+  max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.6;
+}
+.chat-msg.bot{
+  background:#fff;border:1px solid var(--line);
+  align-self:flex-start;border-bottom-left-radius:4px;
+}
+.chat-msg.user{
+  background:var(--pink-dark);color:#fff;
+  align-self:flex-end;border-bottom-right-radius:4px;
+}
+.chat-msg .name{font-size:11px;color:var(--ink-soft);margin-bottom:4px;font-weight:700}
+.chat-input-row{
+  background:#fff;padding:12px;border-top:1px solid var(--line);
+  display:flex;gap:8px;
+}
+.chat-input{
+  flex:1;border:1px solid var(--line);border-radius:999px;
+  padding:10px 16px;font-size:14px;outline:none;
+  font-family:inherit;
+}
+.chat-input:focus{border-color:var(--pink-dark)}
+.chat-send{
+  background:var(--pink-dark);color:#fff;border:none;border-radius:50%;
+  width:40px;height:40px;cursor:pointer;font-size:18px;
+}
+.chat-typing{font-size:12px;color:var(--ink-soft);padding:4px 14px;font-style:italic}
+
+/* ========== TWEETS FEED ========== */
+.tweets-section{background:#fff}
+.tweet-form{
+  background:var(--pink-light);border-radius:18px;padding:20px;
+  max-width:680px;margin:0 auto 32px;
+}
+.tweet-form textarea{
+  width:100%;border:1px solid var(--line);border-radius:14px;
+  padding:14px;font-size:14px;font-family:inherit;line-height:1.6;
+  outline:none;resize:vertical;min-height:90px;
+}
+.tweet-form textarea:focus{border-color:var(--pink-dark)}
+.tweet-form .row{
+  display:flex;gap:10px;justify-content:space-between;margin-top:10px;
+  align-items:center;flex-wrap:wrap;
+}
+.tag-chips{display:flex;gap:6px;flex-wrap:wrap}
+.tag-chip{
+  background:#fff;border:1px solid var(--line);
+  padding:4px 10px;border-radius:999px;font-size:12px;cursor:pointer;
+  font-weight:700;color:var(--ink-soft);user-select:none;
+}
+.tag-chip.active{background:var(--pink-dark);color:#fff;border-color:var(--pink-dark)}
+.tweet-submit{
+  background:var(--pink-dark);color:#fff;border:none;border-radius:999px;
+  padding:10px 24px;font-weight:700;font-size:14px;cursor:pointer;
+}
+.tweets-feed{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
+  max-width:1000px;margin:0 auto;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width:640px){
   section.block{padding:48px 16px}
   .hero{padding:40px 16px 56px}
   .hero h1{font-size:26px}
   .nav-cta{padding:8px 14px;font-size:12px}
+  .chat-fab{bottom:16px;right:16px;width:56px;height:56px;font-size:24px}
+  .chat-window{bottom:84px;right:16px}
 }
 </style>
 </head>
@@ -289,8 +393,8 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
     <h1>ＥＸ風俗出稼ぎ嬢の為の<br><span class="bot">お悩み bot</span></h1>
     <p class="sub">本当に稼げるお店を皆でつぶやき、<br>悪質店は晒して危険を回避しよう。</p>
     <div class="cta-row">
-      <a href="#community" class="btn-primary">いますぐ bot に相談する</a>
-      <a href="#how" class="btn-secondary">使い方を見る</a>
+      <a href="#chat-fab" class="btn-primary" onclick="document.getElementById('chat-fab').click();return false;">いますぐ bot に相談する</a>
+      <a href="#tweets" class="btn-secondary">みんなのつぶやきを見る</a>
     </div>
   </div>
 </section>
@@ -457,6 +561,41 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
   </div>
 </section>
 
+<!-- TWEETS FEED (live community) -->
+<section class="block tweets-section" id="tweets">
+  <div class="inner">
+    <div class="section-title">
+      <span class="eyebrow">みんなのつぶやき</span>
+      <h2>嬢が嬢に<span class="pink">本音をつぶやく</span>。<br>あなたも投稿できます。</h2>
+      <p>登録不要・匿名・運営目視チェック後に公開されます。お店名は伏字 or 都道府県のみで投稿してください。</p>
+    </div>
+
+    <div class="tweet-form">
+      <textarea id="tweet-text" placeholder="例: 渋谷の○○店、求人通り日給12万。寮も個室で清潔。本指名 NG ルール守られてた。出稼ぎ7日で60万。" maxlength="280"></textarea>
+      <div class="row">
+        <div class="tag-chips" id="tag-chips">
+          <span class="tag-chip" data-tag="本当に稼げた">✓ 本当に稼げた</span>
+          <span class="tag-chip" data-tag="寮◎">✓ 寮◎</span>
+          <span class="tag-chip" data-tag="ルール◎">✓ ルール◎</span>
+          <span class="tag-chip" data-tag="注意">⚠ 注意</span>
+          <span class="tag-chip" data-tag="求人と違う">⚠ 求人と違う</span>
+          <span class="tag-chip" data-tag="罰金あり">⚠ 罰金あり</span>
+        </div>
+        <button class="tweet-submit" id="tweet-submit">つぶやく</button>
+      </div>
+      <p style="font-size:11px;color:var(--ink-soft);margin-top:8px">※ 個人名・実店舗名フルネーム・誹謗中傷は投稿後に運営が削除します。Phase 2 では AI が自動チェック予定。</p>
+    </div>
+
+    <div class="tweets-feed" id="tweets-feed">
+      <!-- JavaScript で動的描画 -->
+    </div>
+
+    <div style="text-align:center;margin-top:24px">
+      <p style="font-size:13px;color:var(--ink-soft)">※ 現在 Phase 1 (ローカル保存版)。Phase 2 で全国共有 DB に接続予定。</p>
+    </div>
+  </div>
+</section>
+
 <!-- COMMUNITY CTA -->
 <section class="community-cta" id="community">
   <div class="inner" style="max-width:760px;margin:0 auto">
@@ -506,6 +645,183 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
     本サイトは <b>2026 年 6 月 28 日施行 改正風営法</b>・<b>職業安定法 第 63 条 2 号</b>・<b>景品表示法</b>等を遵守して運営しています。当サイトは「直接の紹介斡旋」を一切行いません。投稿された情報の正確性は運営チームと利用者の協力により担保され、ご自身の判断で応募/勤務を決定してください。18 歳未満の閲覧/利用は禁止です。
   </div>
 </section>
+
+<!-- ===== FLOATING CHAT BOT ===== -->
+<button class="chat-fab" id="chat-fab" aria-label="bot に相談する">
+  💬<span class="badge">AI</span>
+</button>
+<div class="chat-window" id="chat-window" role="dialog" aria-label="ＥＸ お悩み bot">
+  <div class="chat-header">
+    <div>
+      <div class="h-title">ＥＸ お悩み bot</div>
+      <div class="h-sub">匿名・登録不要・24時間OK</div>
+    </div>
+    <button class="h-close" id="chat-close" aria-label="閉じる">×</button>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="chat-msg bot">
+      <div class="name">ＥＸ お悩み bot</div>
+      こんにちは。出稼ぎでお悩みのことを何でも聞いてください。<br><br>例:<br>「日給10万・寮あり・1週間の店」<br>「給料が広告と違うときどうすれば？」<br>「初めての出稼ぎで怖い」
+    </div>
+  </div>
+  <div class="chat-typing" id="chat-typing" style="display:none">bot が入力中…</div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chat-input" type="text" placeholder="メッセージを入力…" maxlength="500">
+    <button class="chat-send" id="chat-send" aria-label="送信">➤</button>
+  </div>
+</div>
+
+<script>
+/* ============ CHAT BOT (Phase 1: scripted Phase 2: Claude API) ============ */
+(function(){
+  const fab = document.getElementById('chat-fab');
+  const win = document.getElementById('chat-window');
+  const closeBtn = document.getElementById('chat-close');
+  const body = document.getElementById('chat-body');
+  const input = document.getElementById('chat-input');
+  const send = document.getElementById('chat-send');
+  const typing = document.getElementById('chat-typing');
+
+  fab.addEventListener('click',()=>win.classList.toggle('open'));
+  closeBtn.addEventListener('click',()=>win.classList.remove('open'));
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    if(who==='bot'){
+      div.innerHTML = '<div class="name">ＥＸ お悩み bot</div>' + text;
+    } else {
+      div.textContent = text;
+    }
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  // Phase 1: scripted responses (Phase 2 で /api/chat に置換)
+  function botReply(userText){
+    const t = userText.toLowerCase();
+    if(/(日給|稼げ|時給|月収)/.test(userText)){
+      return '日給の希望額・働ける期間・エリアを教えてください。<br>例: 「日給12万・1週間・関東」と打つと、過去のつぶやき投稿から条件に合う店舗の実体験を返します。<br><br><b>※ Phase 2 で AI が全国 DB から自動マッチング予定。</b>';
+    }
+    if(/(罰金|違約|給料が違|求人と違)/.test(userText)){
+      return 'それは典型的な悪質店パターンです。<br>1. 契約書面 (LINE/書類) を保管<br>2. 「みんなのつぶやき」に投稿して他の嬢を守る<br>3. 弁護士無料相談 (法テラス) で回収可能性確認<br><br><b>※ 弁護士コネクト機能は Phase 3 で実装予定。</b>';
+    }
+    if(/(怖い|不安|初めて|未経験)/.test(userText)){
+      return '初めての出稼ぎは誰でも怖いです。安全のために必ず:<br>1. 知人/家族 1 人に行き先を伝える<br>2. 帰りの交通費は手元に確保<br>3. 寮の鍵を必ず受け取る<br>4. 怪しい契約書面はその場で写真撮影<br><br>具体的な店名/エリアがあれば「みんなのつぶやき」で検索してみてください。';
+    }
+    if(/(寮|住|個室|家)/.test(userText)){
+      return '寮の写真と実態が違う相談は最多です。<br>応募前に必ず:<br>1. 寮の写真を直近撮影 (1 週間以内) でもらう<br>2. 個室の鍵の有無を確認<br>3. 寮費・光熱費の負担を文面で確認<br><br>過去の寮投稿は「みんなのつぶやき」の「寮◎」タグで見れます。';
+    }
+    return 'ご相談ありがとうございます。<br>もう少し具体的に教えてください:<br>・希望日給<br>・期間 (日数/週)<br>・エリア (関東/関西/北海道/沖縄など)<br>・寮の希望<br>・他に気になっていること<br><br><b>※ Phase 2 で Claude AI が文脈を完全理解して回答する予定です。</b>';
+  }
+
+  function sendMessage(){
+    const text = input.value.trim();
+    if(!text) return;
+    addMsg(text, 'user');
+    input.value = '';
+    typing.style.display = 'block';
+    setTimeout(()=>{
+      typing.style.display = 'none';
+      addMsg(botReply(text), 'bot');
+    }, 600 + Math.random()*700);
+  }
+
+  send.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') sendMessage(); });
+})();
+
+/* ============ TWEETS FEED (Phase 1: LocalStorage Phase 2: D1) ============ */
+(function(){
+  const KEY = 'ex-dekasegi-tweets-v1';
+  const form = document.getElementById('tweet-text');
+  const submit = document.getElementById('tweet-submit');
+  const feed = document.getElementById('tweets-feed');
+  const chips = document.getElementById('tag-chips');
+
+  const SEED = [
+    { id:'s1', name:'あんな', age:24, area:'北海道→東京', text:'渋谷の○○店、求人通り日給12万コンスタント。寮も個室で清潔。本指名 NG ルールが守られてた。出稼ぎ7日で60万。リピ決定。', tags:['本当に稼げた','寮◎','ルール◎'], danger:false, ago:'2時間前' },
+    { id:'s2', name:'みさき', age:27, area:'関西在住', text:'神戸の△△店、寮費1日5000円後出し請求。「タダ」と聞いたのに7日で3.5万天引きされた。求人サイトの記載と違う。要確認。', tags:['注意','求人と違う'], danger:true, ago:'5時間前' },
+    { id:'s3', name:'りお', age:22, area:'初出稼ぎ', text:'池袋の●●店、寮の写真と実際が違いすぎ。「キレイな個室」が雑魚寝の和室。1日で帰った。出稼ぎ初日でこれはきつい。', tags:['注意','求人と違う'], danger:true, ago:'1日前' },
+    { id:'s4', name:'ゆうな', age:29, area:'関東→沖縄', text:'沖縄の□□店、求人通り日給10万＋ホテル代別途支給。雰囲気もよくスタッフが優しい。3週間続けて稼げた。沖縄出稼ぎ初心者にも勧められる。', tags:['本当に稼げた','ルール◎'], danger:false, ago:'2日前' },
+    { id:'s5', name:'みお', age:26, area:'東北→東京', text:'新橋の××店、罰金制度が後出し。遅刻 5000 円・私服 NG 違反 3000 円。求人サイトには無記載。1週間で 2 万消えた。', tags:['注意','罰金あり'], danger:true, ago:'3日前' },
+    { id:'s6', name:'かれん', age:25, area:'九州→大阪', text:'梅田の◆◆店、寮は新築でセキュリティもばっちり。個室＋鍵＋オートロック。Wi-Fi も完備で写メ日記も書きやすかった。', tags:['本当に稼げた','寮◎'], danger:false, ago:'4日前' }
+  ];
+
+  function load(){
+    try{ return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch(e){ return []; }
+  }
+  function save(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+  let selectedTags = [];
+  chips.querySelectorAll('.tag-chip').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      el.classList.toggle('active');
+      const tag = el.dataset.tag;
+      if(el.classList.contains('active')) selectedTags.push(tag);
+      else selectedTags = selectedTags.filter(t=>t!==tag);
+    });
+  });
+
+  function render(){
+    const userTweets = load();
+    const all = [...userTweets, ...SEED];
+    feed.innerHTML = all.map(t=>{
+      const dangerStyle = t.danger ? 'background:#fff5f5;border-color:#ff99aa' : '';
+      const avatarStyle = t.danger ? 'background:linear-gradient(135deg,#ff6688,#a00040)' : '';
+      const initial = (t.name||'?').charAt(0);
+      const tagsHTML = (t.tags||[]).map(tag=>{
+        const isWarning = ['注意','求人と違う','罰金あり'].includes(tag);
+        const cls = isWarning ? 'style="background:#ffd6d6;color:#a00"' : '';
+        return '<span class="tweet-tag" '+cls+'>'+tag+'</span>';
+      }).join('');
+      return `
+      <div class="tweet-preview" style="${dangerStyle}">
+        <div class="tweet-head">
+          <div class="tweet-avatar" style="${avatarStyle}">${initial}</div>
+          <div>
+            <div class="tweet-name">${t.name}（${t.age}・${t.area}）</div>
+            <div class="tweet-meta">${t.ago} ・ ＥＸ お悩み bot</div>
+          </div>
+        </div>
+        <div class="tweet-body">${tagsHTML}
+${t.text}</div>
+      </div>`;
+    }).join('');
+  }
+
+  submit.addEventListener('click',()=>{
+    const text = form.value.trim();
+    if(!text){ form.focus(); return; }
+    if(selectedTags.length === 0){
+      alert('タグを1つ以上選択してください');
+      return;
+    }
+    const isDanger = selectedTags.some(t=>['注意','求人と違う','罰金あり'].includes(t));
+    const tweet = {
+      id: 'u'+Date.now(),
+      name: '匿名嬢',
+      age: '??',
+      area: '匿名',
+      text: text,
+      tags: selectedTags,
+      danger: isDanger,
+      ago: 'たった今'
+    };
+    const arr = load();
+    arr.unshift(tweet);
+    save(arr.slice(0,20));
+    form.value = '';
+    selectedTags = [];
+    chips.querySelectorAll('.tag-chip').forEach(c=>c.classList.remove('active'));
+    render();
+    feed.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  render();
+})();
+</script>
 
 <!-- FOOTER -->
 <footer id="footer">
