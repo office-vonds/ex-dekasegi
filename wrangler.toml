@@ -1,0 +1,11 @@
+name = "ex-dekasegi"
+compatibility_date = "2026-05-12"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ex-dekasegi-db"
+database_id = "be84a930-184b-4eab-b3a1-6db57a2841e4"
+
+[ai]
+binding = "AI"
