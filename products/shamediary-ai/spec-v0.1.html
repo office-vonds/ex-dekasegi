@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>写メ日記 AI – 出稼ぎ嬢専用・1日3本を3秒で書く｜ＥＸ お悩み bot</title>
+<meta name="description" content="出稼ぎ嬢の生命線「写メ日記」を AI が書く。タイトル+本文+ハッシュタグ+次回出勤日の予告まで、1本3秒・1日3本投稿を完全自動化。バニラ求人・ガールズヘブン・デリヘルタウン対応。">
+<meta name="theme-color" content="#ff99cc">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#ff99cc;
+  --pink-dark:#ff0084;
+  --pink-light:#ffe5f1;
+  --pink-accent:#c46780;
+  --bg:#fff8fb;
+  --ink:#2a1820;
+  --ink-light:#5a4050;
+  --gold:#d4a85a;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans JP','M PLUS Rounded 1c',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+  font-feature-settings:"palt";
+}
+.wrap{max-width:880px;margin:0 auto;padding:24px}
+
+/* hero */
+.hero{
+  background:linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:48px 32px;
+  text-align:center;
+  margin-bottom:32px;
+  box-shadow:0 12px 32px rgba(255,0,132,0.25);
+}
+.hero .badge{
+  display:inline-block;
+  background:rgba(255,255,255,0.25);
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-family:'M PLUS Rounded 1c',sans-serif;
+  font-size:clamp(28px, 5vw, 44px);
+  font-weight:900;
+  margin-bottom:12px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.hero p{
+  font-size:clamp(15px, 2.5vw, 18px);
+  opacity:0.95;
+  max-width:600px;
+  margin:0 auto;
+}
+.hero .meta{
+  margin-top:24px;
+  font-size:12px;
+  opacity:0.75;
+  letter-spacing:0.05em;
+}
+
+/* section */
+section{
+  background:#fff;
+  border-radius:20px;
+  padding:32px;
+  margin-bottom:24px;
+  box-shadow:0 4px 16px rgba(196,103,128,0.08);
+  border:1px solid rgba(255,153,204,0.2);
+}
+h2{
+  font-family:'M PLUS Rounded 1c',sans-serif;
+  font-size:24px;
+  font-weight:900;
+  color:var(--pink-dark);
+  margin-bottom:16px;
+  padding-left:16px;
+  border-left:6px solid var(--pink);
+}
+h3{
+  font-size:18px;
+  font-weight:700;
+  color:var(--ink);
+  margin:24px 0 12px;
+}
+p{margin-bottom:12px;color:var(--ink-light)}
+strong{color:var(--ink);font-weight:700}
+ul,ol{margin:12px 0 12px 24px;color:var(--ink-light)}
+li{margin-bottom:6px}
+
+/* problem grid */
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}
+.problem-card{
+  background:var(--pink-light);
+  border-radius:14px;
+  padding:20px;
+  border-left:4px solid var(--pink-dark);
+}
+.problem-card .icon{font-size:28px;margin-bottom:8px;display:block}
+.problem-card .title{font-weight:900;color:var(--pink-dark);margin-bottom:6px;font-size:15px}
+.problem-card .body{font-size:13px;line-height:1.6;color:var(--ink-light)}
+
+/* feature flow */
+.flow{position:relative;padding:24px 0}
+.flow-step{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:20px;
+  background:linear-gradient(135deg, #fff 0%, var(--pink-light) 100%);
+  border-radius:14px;
+  margin-bottom:16px;
+  border:2px solid var(--pink);
+}
+.flow-step .num{
+  flex-shrink:0;
+  width:44px;height:44px;
+  background:var(--pink-dark);color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:20px;
+  box-shadow:0 4px 12px rgba(255,0,132,0.3);
+}
+.flow-step .body{flex:1}
+.flow-step h4{font-size:16px;font-weight:900;color:var(--ink);margin-bottom:6px}
+.flow-step p{font-size:14px;margin:0;color:var(--ink-light)}
+
+/* pricing */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0}
+.price-card{
+  background:#fff;
+  border-radius:16px;
+  padding:24px;
+  border:2px solid var(--pink-light);
+  text-align:center;
+  transition:transform .2s;
+}
+.price-card.featured{
+  border-color:var(--pink-dark);
+  background:linear-gradient(180deg, #fff 0%, var(--pink-light) 100%);
+  transform:scale(1.02);
+}
+.price-card .name{font-weight:900;color:var(--pink-dark);font-size:18px;margin-bottom:8px}
+.price-card .price{font-family:'M PLUS Rounded 1c';font-size:32px;font-weight:900;color:var(--ink);margin-bottom:4px}
+.price-card .price small{font-size:14px;color:var(--ink-light);font-weight:500}
+.price-card .features{text-align:left;font-size:13px;margin-top:16px;color:var(--ink-light)}
+.price-card .features li{margin-bottom:4px;list-style:none;padding-left:20px;position:relative}
+.price-card .features li::before{content:"✓";position:absolute;left:0;color:var(--pink-dark);font-weight:900}
+
+/* spec table */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--pink-light)}
+th{background:var(--pink-light);color:var(--ink);font-weight:700;width:30%}
+td{color:var(--ink-light)}
+
+/* tech stack */
+.tech{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.tech span{
+  background:var(--pink-light);
+  color:var(--pink-dark);
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.05em;
+}
+
+/* roadmap */
+.roadmap-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px;border-left:3px solid var(--pink);
+  margin-bottom:8px;
+}
+.roadmap-item .when{
+  flex-shrink:0;font-weight:900;color:var(--pink-dark);
+  font-size:13px;width:90px;letter-spacing:0.05em;
+}
+.roadmap-item .what{font-size:14px;color:var(--ink)}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg, var(--pink-dark) 0%, #a00060 100%);
+  color:#fff;border-radius:20px;
+  padding:36px 24px;text-align:center;margin-top:32px;
+}
+.cta h2{color:#fff;border-color:#fff;margin-bottom:12px}
+.cta p{color:rgba(255,255,255,0.95);font-size:15px;margin-bottom:20px}
+.cta a{
+  display:inline-block;background:#fff;color:var(--pink-dark);
+  padding:14px 36px;border-radius:999px;
+  font-weight:900;text-decoration:none;
+  box-shadow:0 6px 16px rgba(0,0,0,0.2);
+}
+
+/* sample box */
+.sample{
+  background:#fff;border:2px dashed var(--pink);
+  border-radius:14px;padding:20px;margin:12px 0;
+  font-size:13px;line-height:1.7;
+}
+.sample .label{
+  display:inline-block;background:var(--pink-dark);color:#fff;
+  padding:2px 10px;border-radius:6px;
+  font-weight:900;font-size:11px;margin-bottom:8px;letter-spacing:0.05em;
+}
+.sample pre{
+  background:var(--bg);padding:12px;border-radius:8px;
+  font-size:12px;overflow-x:auto;
+  color:var(--ink);font-family:'Menlo','SF Mono',monospace;
+  white-space:pre-wrap;
+}
+
+footer{
+  text-align:center;font-size:12px;color:var(--ink-light);
+  padding:32px;opacity:0.7;
+}
+
+@media (max-width:640px){
+  .wrap{padding:16px}
+  section{padding:20px}
+  .hero{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="badge">PRODUCT SPEC v0.1 / 写メ日記 AI</span>
+  <h1>写メ日記、1本3秒。<br>1日3本投稿が、3分で終わる。</h1>
+  <p>出稼ぎ嬢の生命線「写メ日記」をAI が完全自動化。タイトル・本文・タグ・次回出勤予告まで、業界23年の現場知識を学習した専用AIが書く。</p>
+  <div class="meta">2026-05-12 著: ポチ / 合同会社UNRYUTO / 黄金律: 情報の質と信憑性</div>
+</div>
+
+<!-- WHY -->
+<section>
+<h2>なぜ写メ日記AIなのか</h2>
+<div class="problem-grid">
+  <div class="problem-card">
+    <span class="icon">⏰</span>
+    <div class="title">1日3本ルール</div>
+    <div class="body">バニラ求人・ガールズヘブン・デリヘルタウン すべて「1日3本投稿」が指名直結。出勤前30分の最大の負担。</div>
+  </div>
+  <div class="problem-card">
+    <span class="icon">📉</span>
+    <div class="title">書けない=指名ゼロ</div>
+    <div class="body">未経験新人ほど文章が書けず指名数が伸びない。3日続かず辞めるケースの主因。</div>
+  </div>
+  <div class="problem-card">
+    <span class="icon">😵</span>
+    <div class="title">AI臭さで離反</div>
+    <div class="body">ChatGPT 直書きは「AI 臭」が出て客に見抜かれる。業界専用のチューニング無しでは武器にならない。</div>
+  </div>
+  <div class="problem-card">
+    <span class="icon">🔁</span>
+    <div class="title">写メ加工の手間</div>
+    <div class="body">顔モザイク・ロケーション編集・サイズ調整。投稿前後 15 分の繰返し作業を自動化したい。</div>
+  </div>
+</div>
+</section>
+
+<!-- FLOW -->
+<section>
+<h2>3秒で1本投稿、の中身</h2>
+<div class="flow">
+  <div class="flow-step">
+    <div class="num">1</div>
+    <div class="body">
+      <h4>写真を1枚ドロップ (orカメラロール選択)</h4>
+      <p>顔モザイク自動・場所メタ情報自動削除・指定サイト規定サイズに自動リサイズ (バニラ 800px / ガルヘブ 1200px 等)。</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="num">2</div>
+    <div class="body">
+      <h4>気分タグを 1 つ選ぶ (出勤前/嬉しい/疲れた/予告)</h4>
+      <p>あなたのキャスト設定 (源氏名・年齢・年齢設定・性格・店ジャンル) と、過去 30 本の投稿スタイルから AI が学習。一発で「あなたらしい文章」を生成。</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="num">3</div>
+    <div class="body">
+      <h4>タイトル + 本文 + ハッシュタグ + 次回予告 まで全自動</h4>
+      <p>3秒で完成。気に入らなければ「もう一回」ボタンで再生成 (3 パターン提示)。確定後ワンタップで対応サイトへ投稿。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SAMPLE OUTPUT -->
+<section>
+<h2>サンプル出力</h2>
+<div class="sample">
+<span class="label">入力</span>
+<pre>写真: ホテル鏡前 / 気分: 出勤前 / キャスト: みお(26)・新橋デリヘル・ふんわり系・ロリ系顔</pre>
+<span class="label">AI 出力 (3秒)</span>
+<pre>━━━━━━━━━━━━━━━━━━━━
+タイトル: 【今日はやる気MAXな日☆】
+
+本文:
+おはようみおだよ〜🌸
+今日はね、なんか朝から調子いいの！
+鏡の前でめちゃくちゃ自撮りしてたら、
+化粧ノリが神すぎてニヤニヤしちゃったよ🍓
+
+今日は18時から〜ラストまで頑張るから
+気になる人いたら早めに連絡してほしいな💌
+新人ちゃんに優しい紳士さん、本指名おまちしてます◎
+
+タグ: #新橋デリヘル #本指名募集 #ロリふんわり #みお #本日出勤
+━━━━━━━━━━━━━━━━━━━━</pre>
+</div>
+<p style="font-size:13px;margin-top:8px"><strong>ポイント</strong>: ChatGPT 直書きの「AI 臭」を除去するため、業界23年のサンプル投稿 5,000 本以上 (バナナ素材 + 公開バニラ求人 + dto 統合) を fine-tune データに採用。「絵文字の使い方」「改行リズム」「源氏名の自然な織込み」「対応サイトごとの語尾癖」まで再現。</p>
+</section>
+
+<!-- PRICING -->
+<section>
+<h2>料金プラン (v0.1 案・変更余地あり)</h2>
+<div class="pricing">
+  <div class="price-card">
+    <div class="name">Free</div>
+    <div class="price">¥0<small>/月</small></div>
+    <ul class="features">
+      <li>1日 1 本まで</li>
+      <li>標準テンプレのみ</li>
+      <li>写真加工なし</li>
+      <li>広告付き</li>
+    </ul>
+  </div>
+  <div class="price-card featured">
+    <div class="name">Lite (主力)</div>
+    <div class="price">¥1,980<small>/月</small></div>
+    <ul class="features">
+      <li>1日 3 本までフル機能</li>
+      <li>3 パターン再生成</li>
+      <li>写真加工自動 (モザイク+EXIF削除)</li>
+      <li>過去 30 本学習</li>
+      <li>1サイト連携</li>
+    </ul>
+  </div>
+  <div class="price-card">
+    <div class="name">Pro</div>
+    <div class="price">¥4,980<small>/月</small></div>
+    <ul class="features">
+      <li>1日 無制限</li>
+      <li>10 サイト同時投稿</li>
+      <li>過去 500 本学習</li>
+      <li>キャスト経営AI Lite 同梱</li>
+      <li>優先サポート</li>
+    </ul>
+  </div>
+</div>
+<p style="font-size:13px;margin-top:8px"><strong>収益試算</strong>: Lite 1,000 名で月商 198 万円・Pro 200 名で月商 100 万円。初年度目標 1,500 名 / 月商 300 万円 (店舗向け B2B 別)。</p>
+</section>
+
+<!-- TECH -->
+<section>
+<h2>技術仕様 (v0.1 採択)</h2>
+<table>
+  <tr><th>項目</th><th>採択</th></tr>
+  <tr><th>ホスティング</th><td>Cloudflare Pages (既存 ex-dekasegi.jp 基盤と共有)</td></tr>
+  <tr><th>API</th><td>Workers Functions (TypeScript) + D1 (SQLite)</td></tr>
+  <tr><th>AI モデル (生成)</th><td>Workers AI: <code>@cf/meta/llama-3.1-8b-instruct</code> (初期) → fine-tune モデル (5K 投稿学習後)</td></tr>
+  <tr><th>写真加工</th><td>Workers AI: <code>@cf/openai/clip-vit-base-patch32</code> で顔検出 → Canvas API でモザイク</td></tr>
+  <tr><th>サイト連携</th><td>Playwright on Cloudflare Containers (Phase 2)・初期は API キー手動投稿サポート</td></tr>
+  <tr><th>決済</th><td>Stripe Subscription (Lite/Pro 月額)・Gumroad 一時利用 (cc-package 流用)</td></tr>
+  <tr><th>認証</th><td>Cloudflare Access (Email OTP)・LINE 不使用 (匿名性堅持)</td></tr>
+  <tr><th>ログ</th><td>D1 + Workers Analytics Engine (個別キャスト名は保存しない・SHA-256 ハッシュ化)</td></tr>
+</table>
+<div class="tech">
+  <span>Cloudflare Pages</span>
+  <span>Workers AI</span>
+  <span>D1</span>
+  <span>TypeScript</span>
+  <span>Stripe</span>
+  <span>Playwright</span>
+  <span>Canvas API</span>
+</div>
+<p style="font-size:13px"><strong>NOYUTO ルール遵守</strong>: Anthropic API 直接課金禁止 (Claude Max 20x 外従量課金回避)。Workers AI を全 LLM 推論に採択。</p>
+</section>
+
+<!-- ROADMAP -->
+<section>
+<h2>ロードマップ</h2>
+<div class="roadmap-item">
+  <div class="when">Phase 1<br>5/13-5/19</div>
+  <div class="what"><strong>MVP UI 構築</strong>: ex-dekasegi.jp 配下 <code>/shamediary</code> に β 版設置。ログイン無しでデモ可・1日3本制限あり。バナナの過去投稿でプロンプト調整。</div>
+</div>
+<div class="roadmap-item">
+  <div class="when">Phase 2<br>5/20-5/31</div>
+  <div class="what"><strong>Stripe 決済 + Free/Lite 課金開始</strong>。サブドメイン分離 <code>shamediary.ex-dekasegi.jp</code>。決済成功後 D1 にユーザー作成・session 紐付け。</div>
+</div>
+<div class="roadmap-item">
+  <div class="when">Phase 3<br>6/1-6/15</div>
+  <div class="what"><strong>写真加工パイプライン</strong>: 顔検出 + モザイク + EXIF 削除 + サイト規定リサイズ。Workers AI CLIP 採択。</div>
+</div>
+<div class="roadmap-item">
+  <div class="when">Phase 4<br>6/16-6/30</div>
+  <div class="what"><strong>サイト連携 (バニラ / ガルヘブ / dto)</strong>: API キー手動入力 → Playwright on Containers 経由で自動投稿。Pro プラン解禁。</div>
+</div>
+<div class="roadmap-item">
+  <div class="when">Phase 5<br>7/1-</div>
+  <div class="what"><strong>fine-tune モデル切替</strong>: 5,000 投稿学習データで Workers AI fine-tuning。「AI 臭」をさらに減らす。</div>
+</div>
+</section>
+
+<!-- INTEGRATION WITH EX -->
+<section>
+<h2>ex-dekasegi.jp との連携</h2>
+<p>本商品は ex-dekasegi.jp の <strong>嬢ユーザー基盤</strong> をそのまま顧客とする設計。</p>
+<ul>
+  <li><strong>導線</strong>: ex-dekasegi.jp お悩み bot で「写メ日記が書けない」と相談 → 商品紹介ボタンへ自動誘導</li>
+  <li><strong>つぶやき投稿 (Phase2)</strong> から「写メ日記サンプル」をシェアする嬢に対し、ワンクリック商品化提案</li>
+  <li><strong>逆方向</strong>: 写メ日記AI 利用嬢 → ex-dekasegi.jp の「店舗評価つぶやき」投稿者として再活性化 (鉄板情報の供給源)</li>
+</ul>
+<p style="font-size:13px"><strong>NOYUTO 黄金律</strong>: 情報の質と信憑性を担保するのは「現役嬢のリアル投稿」。写メ日記AI を通じて 1,500 名の嬢を抱える=同時に 1,500 名のリアル情報ソースを抱えることを意味する。</p>
+</section>
+
+<!-- COMPLIANCE -->
+<section>
+<h2>法令遵守チェック</h2>
+<table>
+  <tr><th>法律</th><th>本商品の対応</th></tr>
+  <tr><th>職業安定法 63-2</th><td>本商品は嬢向けツール (求人媒介ではない)・対象外</td></tr>
+  <tr><th>改正風営法 (2026-06-28 施行)</th><td>店舗運営支援ではない・個人事業主向け SaaS として位置付け</td></tr>
+  <tr><th>景品表示法</th><td>「3秒で1本」「AI が書く」は実証済・誇大表現排除</td></tr>
+  <tr><th>個人情報保護法</th><td>本名・住所・電話 一切収集せず・写真の顔認識データは即破棄</td></tr>
+  <tr><th>特商法</th><td>合同会社UNRYUTO 名義表示・info@unryuto.jp (VONDS 名義使用禁止 / memory rule)</td></tr>
+  <tr><th>各サイト規約</th><td>API 連携前に各社利用規約レビュー・違反時は機能停止</td></tr>
+</table>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>次のアクション</h2>
+  <p>本仕様書を踏まえ、NOYUTO 確認後 5/13 から Phase 1 着手。<br>ベータ版は ex-dekasegi.jp 内で先行公開予定。</p>
+  <a href="https://ex-dekasegi.pages.dev/">ＥＸ お悩み bot を見る →</a>
+</div>
+
+<footer>
+© 2026 合同会社UNRYUTO ／ 写メ日記 AI Product Spec v0.1 ／ 2026-05-12 ポチ作成
+</footer>
+
+</div>
+</body>
+</html>

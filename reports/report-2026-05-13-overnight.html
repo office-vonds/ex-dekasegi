@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ex-dekasegi.jp 一晩完遂報告 (5/12 23:00 → 5/13 09:00) | ＥＸ お悩み bot</title>
+<meta name="description" content="ＥＸ風俗出稼ぎ嬢の為のお悩みbot 一晩完遂報告書。Cloudflare Pages + D1 + Workers AI で完全稼働・法令違反ページ撤去完了・残作業はDNS切替60秒+GA4作成60秒のみ。">
+<meta name="theme-color" content="#ff99cc">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#ff99cc;
+  --pink-dark:#ff0084;
+  --pink-light:#ffe5f1;
+  --pink-deep:#a00060;
+  --bg:#fff8fb;
+  --ink:#2a1820;
+  --ink-light:#5a4050;
+  --green:#1d9d6c;
+  --red:#d33;
+  --amber:#d4a85a;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans JP','M PLUS Rounded 1c',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+  font-feature-settings:"palt";
+}
+.wrap{max-width:920px;margin:0 auto;padding:24px}
+
+/* hero */
+.hero{
+  background:linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:48px 32px;
+  margin-bottom:32px;
+  box-shadow:0 12px 32px rgba(255,0,132,0.25);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;top:-50%;right:-20%;
+  width:400px;height:400px;
+  background:radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero .badge{
+  display:inline-block;
+  background:rgba(255,255,255,0.25);
+  padding:6px 16px;border-radius:999px;
+  font-size:13px;font-weight:700;letter-spacing:0.1em;
+  margin-bottom:12px;
+}
+.hero h1{
+  font-family:'M PLUS Rounded 1c',sans-serif;
+  font-size:clamp(28px, 5vw, 42px);
+  font-weight:900;line-height:1.3;
+  margin-bottom:12px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.hero .sub{
+  font-size:clamp(15px, 2.5vw, 18px);
+  opacity:0.95;
+}
+.hero .meta{
+  margin-top:20px;font-size:12px;opacity:0.75;
+  letter-spacing:0.05em;
+  border-top:1px solid rgba(255,255,255,0.3);
+  padding-top:16px;
+}
+
+/* status bar */
+.status-bar{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:32px;
+}
+.stat{
+  background:#fff;border-radius:14px;padding:20px;
+  text-align:center;
+  border:2px solid var(--pink-light);
+  box-shadow:0 2px 8px rgba(196,103,128,0.06);
+}
+.stat .num{
+  font-family:'M PLUS Rounded 1c';
+  font-size:32px;font-weight:900;
+  color:var(--pink-dark);line-height:1;
+  margin-bottom:6px;
+}
+.stat .lbl{font-size:12px;color:var(--ink-light);font-weight:700;letter-spacing:0.05em}
+
+/* section */
+section{
+  background:#fff;
+  border-radius:20px;
+  padding:32px;
+  margin-bottom:24px;
+  box-shadow:0 4px 16px rgba(196,103,128,0.08);
+  border:1px solid rgba(255,153,204,0.2);
+}
+h2{
+  font-family:'M PLUS Rounded 1c',sans-serif;
+  font-size:24px;font-weight:900;
+  color:var(--pink-dark);
+  margin-bottom:16px;
+  padding-left:16px;
+  border-left:6px solid var(--pink);
+}
+h3{
+  font-size:17px;font-weight:700;
+  color:var(--ink);margin:20px 0 10px;
+}
+p{margin-bottom:10px;color:var(--ink-light)}
+strong{color:var(--ink);font-weight:700}
+
+/* check list */
+.checklist{list-style:none;padding:0;margin:12px 0}
+.checklist li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 16px;margin-bottom:8px;
+  background:var(--bg);border-radius:10px;
+  border-left:4px solid var(--green);
+}
+.checklist li.todo{border-left-color:var(--amber);background:#fff8e8}
+.checklist li.blocked{border-left-color:var(--red);background:#ffeded}
+.checklist .mark{
+  flex-shrink:0;font-weight:900;
+  width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--green);color:#fff;
+  font-size:14px;
+}
+.checklist li.todo .mark{background:var(--amber)}
+.checklist li.blocked .mark{background:var(--red)}
+.checklist .body{flex:1;font-size:14px;line-height:1.6;color:var(--ink)}
+.checklist .body small{display:block;color:var(--ink-light);font-size:12px;margin-top:3px}
+
+/* table */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--pink-light);vertical-align:top}
+th{background:var(--pink-light);color:var(--ink);font-weight:700}
+td code{
+  background:var(--bg);
+  padding:2px 6px;border-radius:4px;
+  font-family:'Menlo','SF Mono',monospace;
+  font-size:12px;color:var(--pink-deep);
+}
+
+/* code box */
+.code-box{
+  background:var(--ink);color:#fff;
+  border-radius:10px;padding:14px 16px;
+  font-family:'Menlo','SF Mono',monospace;
+  font-size:12px;line-height:1.6;
+  overflow-x:auto;margin:10px 0;
+}
+.code-box .cmt{color:#9aa;font-style:italic}
+
+/* sample */
+.sample{
+  background:var(--bg);border:2px dashed var(--pink);
+  border-radius:12px;padding:16px;margin:10px 0;
+  font-size:13px;line-height:1.7;
+}
+.sample .label{
+  display:inline-block;background:var(--pink-dark);color:#fff;
+  padding:2px 8px;border-radius:6px;font-weight:900;
+  font-size:11px;margin-bottom:6px;letter-spacing:0.05em;
+}
+
+/* NOYUTO action */
+.action-card{
+  background:linear-gradient(135deg, #fff 0%, var(--pink-light) 100%);
+  border:3px solid var(--pink-dark);
+  border-radius:18px;
+  padding:24px;margin:16px 0;
+}
+.action-card .head{
+  display:flex;align-items:center;gap:12px;margin-bottom:12px;
+}
+.action-card .num{
+  flex-shrink:0;
+  width:44px;height:44px;
+  background:var(--pink-dark);color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:20px;
+}
+.action-card h3{margin:0;font-size:18px;color:var(--pink-deep)}
+.action-card .when{font-size:12px;color:var(--ink-light);font-weight:700}
+.action-card ol{margin:10px 0 0 24px;font-size:14px;color:var(--ink)}
+.action-card ol li{margin-bottom:6px}
+.action-card .why{
+  margin-top:12px;font-size:12px;
+  background:#fff;padding:8px 12px;
+  border-left:3px solid var(--amber);
+  border-radius:6px;
+}
+
+/* footer */
+footer{
+  text-align:center;font-size:12px;color:var(--ink-light);
+  padding:32px;opacity:0.7;
+}
+
+@media (max-width:640px){
+  .wrap{padding:16px}
+  section{padding:20px}
+  .hero{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="badge">OVERNIGHT REPORT / 2026-05-12 23:00 → 05-13 09:00</span>
+  <h1>ＥＸ風俗出稼ぎ嬢の為のお悩み bot<br>一晩完遂報告</h1>
+  <p class="sub">NOYUTO 動員ゼロで Phase 0 → Phase 5 + 法令対応 + セキュリティ + 商品仕様 までを 10 時間で完走。残作業は NOYUTO 60 秒動員 2 件のみ。</p>
+  <div class="meta">本籍: 合同会社UNRYUTO ／ 担当: ポチ (Claude Code 専任) ／ Rule#15 遵守 ／ 黄金律: 情報の質と信憑性</div>
+</div>
+
+<!-- STATS -->
+<div class="status-bar">
+  <div class="stat"><div class="num">10/12</div><div class="lbl">完遂タスク</div></div>
+  <div class="stat"><div class="num">2件</div><div class="lbl">残・NOYUTO 60秒×2</div></div>
+  <div class="stat"><div class="num">0件</div><div class="lbl">夜中の動員</div></div>
+  <div class="stat"><div class="num">43M</div><div class="lbl">バックアップ</div></div>
+</div>
+
+<!-- LIVE LINK -->
+<section>
+<h2>📍 本番 URL (今すぐ見れる)</h2>
+<p style="font-size:16px"><strong><a href="https://ex-dekasegi.pages.dev/" target="_blank" style="color:var(--pink-dark);text-decoration:underline">https://ex-dekasegi.pages.dev/</a></strong></p>
+<p>ex-dekasegi.jp の DNS 切替後はこの URL がそのまま <code>https://ex-dekasegi.jp/</code> に乗る。<br>旧 WP の Fatal error は <code>.htaccess</code> 全 302 リダイレクトで蓋した (現状アクセスは pages.dev へ流れる)。</p>
+<h3>動作確認結果</h3>
+<table>
+  <tr><th>項目</th><th>確認結果</th></tr>
+  <tr><td>LP 表示</td><td>HTTP 200・CSP/X-Frame/X-Content security headers 全付与</td></tr>
+  <tr><td>AI チャット bot</td><td>業界 23 年現場知識辞書 (法令違反パターン7種 + エリア相場6種 + 寮判定7項目 + 相談リソース6件) を SYSTEM prompt 注入済・回答テンプレ4段構成で動作</td></tr>
+  <tr><td>つぶやき投稿 (POST)</td><td>Workers AI で即時 moderation・正常投稿 approved・個人攻撃/脅迫 rejected で自動 block</td></tr>
+  <tr><td>つぶやき一覧 (GET)</td><td>status='approved' のみ返却</td></tr>
+  <tr><td>Rate Limit</td><td>POST /api/tweets は 60秒 10件・/api/chat は 30件・超過時 429 + 10 分ブロック</td></tr>
+  <tr><td>SEO 土台</td><td>OGP / Twitter Card / canonical / JSON-LD (Organization + WebSite + WebPage) / robots.txt / sitemap.xml / favicon.svg 全配置</td></tr>
+  <tr><td>UNRYUTO 帰属</td><td>footer / JSON-LD / email すべて info@unryuto.jp ・VONDS 表記ゼロ (memory rule 遵守)</td></tr>
+</table>
+</section>
+
+<!-- COMPLETED -->
+<section>
+<h2>✅ 完遂タスク (10件)</h2>
+<ul class="checklist">
+  <li><span class="mark">✓</span><div class="body"><strong>Phase 0 認証準備</strong>: Cloudflare Token / Account ID / D1 ID を <code>~/credentials/cloudflare.conf</code> に格納 (chmod 600)<small>5/12 22:30</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>Phase 1 wrangler セットアップ</strong>: v4.90.1 グローバルインストール・PATH 永続化<small>5/12 22:40</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>Phase 2 D1 構築</strong>: ex-dekasegi-db (APAC) 作成・tweets / chat_logs / moderation / rate_limit の 4 table + 3 index<small>5/12 23:00</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>Phase 3 Workers Functions 実装</strong>: chat / tweets / moderate / _middleware の 4 ファイル・Workers AI <code>@cf/meta/llama-3.1-8b-instruct</code> 採択・Anthropic API 直接課金完全回避<small>5/12 23:20</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>Phase 4 CF Pages デプロイ</strong>: ex-dekasegi プロジェクト作成・public/ 配下静的配信 + Functions bundle 同梱<small>5/12 23:40</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>法令違反ページ撤去</strong>: 旧 WP 4.9.29 が PHP 8.2 切替で Fatal error 多発 + サーバーパス漏洩 → <code>.htaccess</code> 全 URL 302 リダイレクトで即時封鎖。加盟店募集 / ネットスカウト ページも同時に到達不能化<small>5/12 23:44</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>FTP 全体バックアップ</strong>: <code>_backup/2026-05-12/sv1092.wpx.ne.jp/</code> に 95MB・tar.gz 化で 43MB<small>5/12 23:49</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>bot 知識辞書化 (黄金律)</strong>: <code>functions/_knowledge.ts</code> に業界 23 年現場知識を JSON 化 (違法パターン7・エリア相場6・寮判定7・相談リソース6) → SYSTEM prompt に注入・回答テンプレ4段構成<small>5/12 23:50</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>SEO 土台 + セキュリティ強化</strong>: OGP / Twitter Card / JSON-LD / canonical / robots.txt / sitemap.xml / favicon.svg / CSP / X-Frame / Permissions-Policy / rate-limit 600秒ブロック<small>5/13 00:00</small></div></li>
+  <li><span class="mark">✓</span><div class="body"><strong>写メ日記 AI MVP 仕様書 (HTML)</strong>: <code>products/shamediary-ai/spec-v0.1.html</code>・LP 昇格可能品質・3秒で1本投稿の UX・Free/Lite/Pro 料金案 (¥0/¥1,980/¥4,980)・Phase 1-5 ロードマップ・法令遵守表<small>5/13 00:20</small></div></li>
+</ul>
+</section>
+
+<!-- REMAINING NOYUTO ACTIONS -->
+<section>
+<h2>🎯 残・NOYUTO 動員 (合計 120 秒)</h2>
+
+<div class="action-card">
+  <div class="head">
+    <div class="num">1</div>
+    <div>
+      <h3>DNS 切替: ex-dekasegi.jp → Cloudflare Pages</h3>
+      <div class="when">所要 60秒 / お名前.com で操作</div>
+    </div>
+  </div>
+  <ol>
+    <li>お名前.com にログイン → ドメイン一覧 → <code>ex-dekasegi.jp</code></li>
+    <li>「DNSレコード設定」→ A レコードを以下に追加 (CNAME より A 推奨):<br>
+        ホスト名: <code>@</code> / TYPE: <code>CNAME</code> / VALUE: <code>ex-dekasegi.pages.dev</code><br>
+        ホスト名: <code>www</code> / TYPE: <code>CNAME</code> / VALUE: <code>ex-dekasegi.pages.dev</code></li>
+    <li>保存 → CF Pages 側「Custom domains」で <code>ex-dekasegi.jp</code> 追加 (これは私が朝にやる・NOYUTO は DNS だけでOK)</li>
+  </ol>
+  <div class="why"><strong>Why</strong>: 現在 ex-dekasegi.jp は旧 WPX サーバー (PHP 8.2 で Fatal error) を指している。DNS を CF Pages に切替えれば即座に新サイトが <code>ex-dekasegi.jp</code> で見える。.htaccess リダイレクトは中間つなぎ。</div>
+</div>
+
+<div class="action-card">
+  <div class="head">
+    <div class="num">2</div>
+    <div>
+      <h3>GA4 property 作成: ex-dekasegi.jp</h3>
+      <div class="when">所要 60秒 / GA4 UI で操作</div>
+    </div>
+  </div>
+  <ol>
+    <li>analytics.google.com → 管理 → アカウント「絆ILゲーム」(UNRYUTO 帰属) を選択</li>
+    <li>「プロパティを作成」→ 名前: <code>ex-dekasegi.jp</code> / タイムゾーン: 日本 / 通貨: JPY / 業種: 仕事と教育</li>
+    <li>データストリーム作成 → ウェブ → URL: <code>https://ex-dekasegi.jp</code> / 名称: ex-dekasegi.jp (web)</li>
+    <li>発行された Measurement ID (G-XXXXXXX) を NOYUTO が私に伝える → 私が <code>public/index.html</code> の <code>G-XXXXXXX</code> 1 line を差替えて再 deploy (3 分)</li>
+  </ol>
+  <div class="why"><strong>Why</strong>: GA4 Admin API は Service Account に property 作成権限が無い (read-only 限定)。これは UI 必須。gtag コードは既に index.html に仕込み済で、ID 確定後 1 line 差替で完成。</div>
+</div>
+
+<p style="margin-top:24px;font-size:14px"><strong>※ 上記 2 件は順不同。DNS 切替後 GA4 を作るのが推奨 (本番 URL で計測スタート)。</strong></p>
+</section>
+
+<!-- KNOWLEDGE PROOF -->
+<section>
+<h2>📚 黄金律の物証: bot 知識辞書サンプル</h2>
+<p>NOYUTO 直命「情報の質と信憑性さえ外さなければシンプルに勝てる」を実装に落とした結果。実際の bot 応答 (再現可能):</p>
+
+<div class="sample">
+<span class="label">USER 質問</span><br>
+「罰金制度のある店に応募しちゃった。どうしたらいい？」
+</div>
+
+<div class="sample">
+<span class="label">AI BOT 応答 (実際の本番出力)</span>
+<p style="margin-top:6px;font-size:13px;line-height:1.7">
+<strong>1. ユーザーの不安/質問を 1 行で要約</strong><br>
+応募した店が罰金制度を導入しているのでどうしたらいい？<br><br>
+
+<strong>2. 該当する悪質パターン</strong><br>
+⚠️ 罰金/違約金/ペナルティ (根拠: 労基法違反の可能性)<br><br>
+
+<strong>3. 店に確認すべき具体ポイント</strong><br>
+- 罰金制度の内容と範囲を明確に説明してください。<br>
+- 罰金制度の適用基準と計算方法を説明してください。<br>
+- 罰金制度はどのような場合に適用されますか。<br>
+- 罰金制度はどのように解除または減免されるかを説明してください。<br><br>
+
+<strong>4. 相談リソース番号を提示</strong><br>
+- 法テラス (無料法律相談): 0570-078374 (罰金返還・契約解除・労働問題)
+</p>
+</div>
+
+<p style="font-size:13px"><strong>ChatGPT 直書きの「無難な励まし」では絶対に出てこない構成</strong>。違法パターン辞書 + 根拠法律 + 公的相談先電話番号まで構造化済。これが「黄金律の物証」。</p>
+</section>
+
+<!-- TECH STACK -->
+<section>
+<h2>🛠 技術スタック (確定)</h2>
+<table>
+  <tr><th>レイヤー</th><th>採択</th></tr>
+  <tr><td>ホスティング</td><td>Cloudflare Pages</td></tr>
+  <tr><td>API</td><td>Cloudflare Workers Functions (TypeScript)</td></tr>
+  <tr><td>DB</td><td>Cloudflare D1 (SQLite互換) / APAC region</td></tr>
+  <tr><td>AI 推論</td><td>Cloudflare Workers AI <code>@cf/meta/llama-3.1-8b-instruct</code></td></tr>
+  <tr><td>認証</td><td>未実装 (Phase 2)・現状は session_hash (SHA-256・日次匿名化) で chat_logs 紐付け</td></tr>
+  <tr><td>レート制限</td><td>D1 rate_limit テーブル・IP×ルート単位 60秒窓・違反時 600秒ブロック</td></tr>
+  <tr><td>セキュリティ</td><td>CSP / X-Frame-Options DENY / X-Content-Type-Options nosniff / Permissions-Policy / Referrer-Policy</td></tr>
+  <tr><td>SEO</td><td>JSON-LD (Organization / WebSite / WebPage) / OGP / Twitter Card / canonical / sitemap.xml / robots.txt</td></tr>
+  <tr><td>ソース管理</td><td>github.com/office-vonds/ex-dekasegi (本体 VONDS 主 repo と分離・専属 repo)</td></tr>
+  <tr><td>NOYUTO ルール遵守</td><td>Anthropic API 直接課金 ❌ (Workers AI で代替) ／ VONDS 名義 ❌ (UNRYUTO 固定) ／ LINE/電話/メール非収集</td></tr>
+</table>
+</section>
+
+<!-- COSTS -->
+<section>
+<h2>💰 月次コスト見積</h2>
+<table>
+  <tr><th>項目</th><th>無料枠</th><th>従量課金</th><th>当面の課金</th></tr>
+  <tr><td>Cloudflare Pages</td><td>500 deploy/月</td><td>無料枠超 $5/月〜</td><td><strong style="color:var(--green)">¥0</strong></td></tr>
+  <tr><td>Workers Functions</td><td>10万 req/日</td><td>$0.30/100万 req</td><td><strong style="color:var(--green)">¥0</strong> (見込)</td></tr>
+  <tr><td>D1</td><td>5GB / 500万 row read/日</td><td>$0.75/1B read</td><td><strong style="color:var(--green)">¥0</strong></td></tr>
+  <tr><td>Workers AI</td><td>1万 Neurons/日 (≒数千 req)</td><td>$0.011/1k Neuron</td><td>Phase 1 <strong style="color:var(--green)">¥0</strong> / 1日 1万人 req 規模で月 ~¥3,000</td></tr>
+  <tr><td>WPX 旧サーバー</td><td>-</td><td>-</td><td>DNS 切替後解約 → 月額削減</td></tr>
+</table>
+<p style="font-size:13px"><strong>結論</strong>: 月間アクセス 1 万 PV 程度までは <strong>完全無料</strong>。商品化後の収益が立ち上がる前にコスト発生しない設計。</p>
+</section>
+
+<!-- ARTIFACTS -->
+<section>
+<h2>📦 成果物パス一覧</h2>
+<table>
+  <tr><th>ファイル</th><th>役割</th></tr>
+  <tr><td><code>functions/_middleware.ts</code></td><td>CORS / Rate Limit / セキュリティヘッダー / CSP</td></tr>
+  <tr><td><code>functions/_knowledge.ts</code></td><td>業界23年現場知識辞書 (黄金律の物証)</td></tr>
+  <tr><td><code>functions/api/chat.ts</code></td><td>Workers AI bot 応答 + chat_logs 永続化</td></tr>
+  <tr><td><code>functions/api/tweets.ts</code></td><td>GET 一覧 / POST 投稿 + 即時 AI moderation</td></tr>
+  <tr><td><code>functions/api/moderate.ts</code></td><td>単発再審査エンドポイント</td></tr>
+  <tr><td><code>public/index.html</code></td><td>LP 本体・GA4 placeholder 仕込済</td></tr>
+  <tr><td><code>public/robots.txt</code> / <code>sitemap.xml</code> / <code>favicon.svg</code></td><td>SEO 土台</td></tr>
+  <tr><td><code>wrangler.toml</code></td><td>CF Pages 設定 (DB binding + AI binding)</td></tr>
+  <tr><td><code>_backup/2026-05-12-ex-dekasegi-full.tar.gz</code></td><td>旧 WP 全体バックアップ (43MB)</td></tr>
+  <tr><td><code>products/shamediary-ai/spec-v0.1.html</code></td><td>写メ日記 AI 商品仕様書 (LP 昇格候補)</td></tr>
+  <tr><td><code>reports/report-2026-05-13-overnight.html</code></td><td>本報告書 (この HTML)</td></tr>
+</table>
+</section>
+
+<!-- NEXT -->
+<section>
+<h2>🚀 次フェーズ (NOYUTO 動員後)</h2>
+<table>
+  <tr><th>Phase</th><th>内容</th><th>Owner</th></tr>
+  <tr><td>5/13 朝</td><td>NOYUTO 動員 2 件 (DNS + GA4) → ポチ側 Custom domain 接続 + gtag 差替・3 分</td><td>NOYUTO + ポチ</td></tr>
+  <tr><td>5/13 - 5/19</td><td>写メ日記 AI MVP Phase 1 着手 (<code>/shamediary</code> 配下に β 版設置)</td><td>ポチ</td></tr>
+  <tr><td>5/20 -</td><td>Stripe 決済連携 + Free/Lite/Pro 料金開始</td><td>ポチ</td></tr>
+  <tr><td>6月</td><td>写真加工パイプライン + サイト連携 (バニラ/ガルヘブ/dto)</td><td>ポチ</td></tr>
+  <tr><td>7月-</td><td>fine-tune モデル切替 (5,000 投稿学習データ)</td><td>ポチ</td></tr>
+</table>
+</section>
+
+<footer>
+© 2026 合同会社UNRYUTO ／ ex-dekasegi.jp Overnight Report ／ 2026-05-13 09:00 着任時参照 ／ 担当: ポチ
+</footer>
+
+</div>
+</body>
+</html>
