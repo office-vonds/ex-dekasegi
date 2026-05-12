@@ -1,0 +1,19 @@
+# 認証情報 (絶対コミット禁止・Rule#10)
+.env
+.env.local
+.env.*.local
+credentials/
+*.pem
+*.key
+
+# バックアップ (本番サイト全体・大容量・別管理)
+_backup/
+*.tar.gz
+*.zip
+
+# ローカル一時
+tmp/
+.DS_Store
+node_modules/
+__pycache__/
+*.log
