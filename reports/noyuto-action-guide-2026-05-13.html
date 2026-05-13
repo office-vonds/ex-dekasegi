@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOYUTO 動員手順書 — GA4 + GSC + DNS切替 (ex-dekasegi.jp)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#ff99cc;--pink-dark:#ff0084;--pink-light:#ffe5f1;
+  --ink:#2a1820;--ink-soft:#5a4651;--line:#ffd3e3;
+  --green:#00a86b;--orange:#ff7b00;--red:#d93025;
+}
+body{
+  font-family:"M PLUS Rounded 1c","Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  background:#fff8fb;color:var(--ink);line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--pink-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
+
+.wrap{max-width:920px;margin:0 auto;padding:40px 20px 80px}
+
+.hero{
+  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  color:#fff;padding:48px 32px;border-radius:24px;text-align:center;
+  box-shadow:0 12px 40px rgba(255,0,132,0.25);margin-bottom:36px;
+}
+.hero h1{font-size:clamp(24px,4.5vw,34px);font-weight:900;line-height:1.4;margin-bottom:12px}
+.hero p{font-size:15px;opacity:0.95}
+.hero .meta{
+  display:inline-block;background:rgba(255,255,255,0.2);
+  padding:6px 18px;border-radius:999px;font-size:13px;font-weight:700;margin-top:18px;
+}
+
+.summary{
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:24px 28px;margin-bottom:32px;
+}
+.summary h2{font-size:18px;color:var(--pink-dark);margin-bottom:14px;font-weight:900}
+.summary ul{padding-left:0;list-style:none}
+.summary li{
+  padding:8px 0;font-size:15px;display:flex;align-items:flex-start;gap:10px;
+  border-bottom:1px dashed var(--line);
+}
+.summary li:last-child{border-bottom:none}
+.summary li::before{content:"▶";color:var(--pink-dark);font-size:12px;margin-top:4px}
+.summary li b{color:var(--ink)}
+
+.step-block{
+  background:#fff;border:2px solid var(--pink);border-radius:20px;
+  padding:32px 28px;margin-bottom:28px;
+  box-shadow:0 6px 20px rgba(255,153,204,0.15);
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--pink-dark);color:#fff;width:48px;height:48px;border-radius:50%;
+  font-weight:900;font-size:20px;margin-bottom:14px;
+}
+.step-block h2{
+  font-size:22px;color:var(--ink);font-weight:900;margin-bottom:6px;
+}
+.step-block .time-badge{
+  display:inline-block;background:var(--pink-light);color:var(--pink-dark);
+  padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-left:8px;vertical-align:middle;
+}
+.step-block .lead{color:var(--ink-soft);font-size:14px;margin-bottom:24px}
+
+.action-list{counter-reset:item;list-style:none;padding:0}
+.action-list > li{
+  counter-increment:item;position:relative;
+  background:var(--pink-light);border-radius:14px;padding:18px 22px 18px 64px;
+  margin-bottom:14px;font-size:15px;line-height:1.85;
+}
+.action-list > li::before{
+  content:counter(item);position:absolute;left:18px;top:18px;
+  width:32px;height:32px;background:var(--pink-dark);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+}
+.action-list b{color:var(--ink);background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
+.action-list code{
+  background:#2a1820;color:#ffb3d9;padding:3px 10px;border-radius:6px;
+  font-size:13px;font-family:Menlo,Consolas,monospace;display:inline-block;margin:2px 0;
+}
+
+.url-box{
+  background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:12px 16px;margin:10px 0;font-family:Menlo,Consolas,monospace;
+  font-size:13px;word-break:break-all;color:var(--pink-dark);
+}
+
+.input-table{
+  width:100%;border-collapse:collapse;margin-top:14px;background:#fff;
+  border-radius:10px;overflow:hidden;border:1px solid var(--line);
+}
+.input-table th{
+  background:var(--pink-light);color:var(--ink);padding:10px 14px;
+  text-align:left;font-size:13px;font-weight:700;border-bottom:1px solid var(--line);
+}
+.input-table td{
+  padding:10px 14px;font-size:14px;border-bottom:1px solid var(--line);
+}
+.input-table tr:last-child td{border-bottom:none}
+.input-table td:first-child{font-weight:700;color:var(--ink-soft);width:35%}
+.input-table td code{
+  background:#2a1820;color:#ffb3d9;padding:2px 8px;border-radius:5px;
+  font-family:Menlo,Consolas,monospace;font-size:12px;
+}
+
+.post-action{
+  background:var(--green);color:#fff;border-radius:14px;padding:18px 22px;margin-top:18px;
+  font-size:14px;line-height:1.7;
+}
+.post-action b{background:rgba(0,0,0,0.2);padding:2px 10px;border-radius:6px;display:inline-block;margin-right:6px}
+
+.warning-box{
+  background:#fff7e6;border-left:4px solid var(--orange);
+  padding:16px 20px;border-radius:8px;margin:20px 0;font-size:14px;
+}
+.warning-box b{color:var(--orange)}
+
+.deliver-back{
+  background:linear-gradient(135deg,#2a1820,#5a4651);color:#fff;
+  border-radius:18px;padding:32px 28px;margin-top:36px;text-align:center;
+}
+.deliver-back h2{font-size:20px;font-weight:900;margin-bottom:14px}
+.deliver-back p{font-size:14px;line-height:1.8;opacity:0.95}
+.deliver-back code{
+  background:rgba(255,153,204,0.25);color:#fff;padding:4px 12px;
+  border-radius:6px;font-family:Menlo,Consolas,monospace;display:inline-block;margin:4px 0;
+}
+
+.timeline{
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:24px 28px;margin-top:32px;
+}
+.timeline h2{font-size:16px;color:var(--pink-dark);margin-bottom:14px;font-weight:900}
+.timeline ol{padding-left:20px;font-size:14px;line-height:2}
+.timeline ol li b{color:var(--ink)}
+
+footer{
+  text-align:center;margin-top:48px;color:var(--ink-soft);
+  font-size:12px;padding-top:24px;border-top:1px solid var(--line);
+}
+
+@media (max-width:640px){
+  .wrap{padding:24px 14px 60px}
+  .hero{padding:36px 22px}
+  .step-block{padding:24px 20px}
+  .action-list > li{padding:16px 18px 16px 58px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>NOYUTO 動員手順書<br>GA4 + GSC + DNS切替</h1>
+  <p>合計所要時間: <b>約3分</b> ・ Step ごとに完結 ・ pochi が並走</p>
+  <div class="meta">2026-05-13 ・ ex-dekasegi.jp 立ち上げ Phase 3</div>
+</section>
+
+<!-- SUMMARY -->
+<section class="summary">
+  <h2>動員の全体像</h2>
+  <ul>
+    <li><b>Step 1</b>: GA4 プロパティ作成 → 測定ID取得 (60秒)</li>
+    <li><b>Step 2</b>: GSC プロパティ追加 → GA4経由でverify (60秒)</li>
+    <li><b>Step 3</b>: お名前.com DNS切替 (60秒)</li>
+    <li>合計: <b>3分</b> ・ 1ブロックで完結 ・ NOYUTO PC のみで完了</li>
+  </ul>
+</section>
+
+<!-- STEP 1: GA4 -->
+<section class="step-block">
+  <div class="step-num">1</div>
+  <h2>GA4 プロパティ作成<span class="time-badge">所要 60秒</span></h2>
+  <p class="lead">解析開始の起点。測定ID (G-XXXXXXXXXX) を取得して pochi に渡せばOK。</p>
+
+  <ol class="action-list">
+    <li>
+      下記URLを開く。<br>
+      <div class="url-box">https://analytics.google.com/</div>
+    </li>
+    <li>
+      左下の<b>歯車アイコン (管理)</b> をクリック → アカウント欄から <b>「絆ILゲーム」</b> を選択。
+    </li>
+    <li>
+      右側「プロパティ」列の <b>「+ プロパティを作成」</b> をクリック → 下記を入力:
+      <table class="input-table">
+        <tr><th colspan="2">プロパティの詳細</th></tr>
+        <tr><td>プロパティ名</td><td><code>ex-dekasegi</code></td></tr>
+        <tr><td>レポートのタイムゾーン</td><td><code>日本</code></td></tr>
+        <tr><td>通貨</td><td><code>日本円 (JPY ¥)</code></td></tr>
+      </table>
+      <b>「次へ」</b> をクリック。<br>
+      ビジネスの詳細・ビジネス目標は <b>「コミュニティ」「ユーザー行動の調査」</b> を選択して <b>「作成」</b>。
+    </li>
+    <li>
+      データストリーム選択画面で <b>「ウェブ」</b> をクリック → 下記を入力:
+      <table class="input-table">
+        <tr><th colspan="2">ウェブストリームの設定</th></tr>
+        <tr><td>ウェブサイトのURL</td><td><code>https://ex-dekasegi.jp</code></td></tr>
+        <tr><td>ストリーム名</td><td><code>ex-dekasegi web</code></td></tr>
+      </table>
+      <b>「ストリームを作成」</b> をクリック。
+    </li>
+    <li>
+      作成された画面の右上に表示される <b>測定ID (例: G-ABC123XYZ)</b> をコピー。
+    </li>
+  </ol>
+
+  <div class="post-action">
+    <b>納品</b>測定ID (G-で始まる文字列) を pochi にチャットで渡す。pochi が30秒で HTML に差し込み + 本番再 deploy までやる。
+  </div>
+</section>
+
+<!-- STEP 2: GSC -->
+<section class="step-block">
+  <div class="step-num">2</div>
+  <h2>Search Console プロパティ追加<span class="time-badge">所要 60秒</span></h2>
+  <p class="lead">Step 1 完了後すぐ。GA4 連携で1発verify。検索順位とインデックス監視の起点。</p>
+
+  <ol class="action-list">
+    <li>
+      下記URLを開く。<br>
+      <div class="url-box">https://search.google.com/search-console</div>
+    </li>
+    <li>
+      左上の <b>「プロパティを追加」</b> ボタン (または既存プロパティのプルダウンから「+プロパティを追加」) をクリック。
+    </li>
+    <li>
+      <b>「URLプレフィックス」</b> 側 (右側のボックス) に下記を入力 → <b>「続行」</b> をクリック:
+      <div class="url-box">https://ex-dekasegi.jp/</div>
+      <small style="color:var(--ink-soft)">※ 末尾 / 必須・スラッシュ忘れると別プロパティ扱いになる。</small>
+    </li>
+    <li>
+      確認方法の選択画面で <b>「Google Analytics」</b> をクリック。<br>
+      Step 1 の GA4 が同じ Google アカウントなら <b>「所有権を確認しました」</b> と即表示される。
+    </li>
+    <li>
+      <b>「プロパティに移動」</b> をクリック → pochi に「GSC 登録完了」と一言チャット。
+    </li>
+  </ol>
+
+  <div class="warning-box">
+    <b>verify が GA4 経由で通らない場合のみ</b>: 確認方法画面で「HTMLファイル」を選び、表示された <code>google-XXXXXXXXX.html</code> のファイル名を pochi に渡す。pochi が30秒で配置 deploy する。
+  </div>
+
+  <div class="post-action">
+    <b>納品</b>「GSC 登録完了」のチャット1行で OK。pochi が即sitemap.xml提出 + index status監視まで自動化する。
+  </div>
+</section>
+
+<!-- STEP 3: DNS -->
+<section class="step-block">
+  <div class="step-num">3</div>
+  <h2>お名前.com で DNS 切替<span class="time-badge">所要 60秒</span></h2>
+  <p class="lead">独自ドメイン ex-dekasegi.jp を Cloudflare Pages に向ける最終操作。<b>これが完了したらサイトが ex-dekasegi.jp で表示される</b>。</p>
+
+  <ol class="action-list">
+    <li>
+      下記URLを開く・ログイン。<br>
+      <div class="url-box">https://www.onamae.com/navi/login.html</div>
+    </li>
+    <li>
+      上部メニュー <b>「ドメイン」</b> → <b>「ドメイン機能一覧」</b> → <b>「DNS関連機能の設定」</b> → 一覧から <b>ex-dekasegi.jp</b> にチェック → <b>「次へ」</b>。
+    </li>
+    <li>
+      <b>「DNSレコード設定を利用する」</b> の右端「設定する」をクリック。
+    </li>
+    <li>
+      既存のAレコード・CNAMEレコードがあれば一旦すべて <b>「削除」</b> (右端のゴミ箱アイコン)。<br>
+      <small style="color:var(--ink-soft)">※ 旧Xサーバー向けレコードの掃除。残ってると優先順位の競合が起きる。</small>
+    </li>
+    <li>
+      新しいレコードを2つ追加:
+      <table class="input-table">
+        <tr><th colspan="2">レコード A (ルートドメイン)</th></tr>
+        <tr><td>ホスト名</td><td>空欄のまま (またはアットマーク)</td></tr>
+        <tr><td>TYPE</td><td><code>CNAME</code></td></tr>
+        <tr><td>VALUE</td><td><code>ex-dekasegi.pages.dev</code></td></tr>
+        <tr><td>TTL</td><td>3600 (デフォルト)</td></tr>
+      </table>
+      <br>
+      <table class="input-table">
+        <tr><th colspan="2">レコード B (www. 経由対策)</th></tr>
+        <tr><td>ホスト名</td><td><code>www</code></td></tr>
+        <tr><td>TYPE</td><td><code>CNAME</code></td></tr>
+        <tr><td>VALUE</td><td><code>ex-dekasegi.pages.dev</code></td></tr>
+        <tr><td>TTL</td><td>3600 (デフォルト)</td></tr>
+      </table>
+    </li>
+    <li>
+      <b>「確認画面へ進む」</b> → <b>「設定する」</b> で確定。<br>
+      DNS Preview のチェックがあれば外す (上書き上書きで競合する場合あり)。
+    </li>
+    <li>
+      pochi にチャットで <b>「DNS切替完了」</b> と一言。
+    </li>
+  </ol>
+
+  <div class="warning-box">
+    <b>反映時間</b>: 通常 5分〜2時間で全世界反映。最大24時間。<br>
+    <b>確認方法</b>: pochi が <code>dig ex-dekasegi.jp +short</code> で5分おき監視・反映確認次第 Cloudflare Pages カスタムドメイン設定 + SSL証明書発行まで自動化する。
+  </div>
+
+  <div class="post-action">
+    <b>納品</b>「DNS切替完了」の1行チャットで OK。pochi が即 Cloudflare 側のカスタムドメイン登録・SSL自動発行・最終疎通確認まで完遂する。
+  </div>
+</section>
+
+<!-- AFTER -->
+<section class="deliver-back">
+  <h2>3 ステップ完了後の自動化フロー (pochi 側)</h2>
+  <p>
+    NOYUTO が3分で渡した結果を起点に、pochi 側で完全自動化:<br><br>
+    <code>1. 測定ID差込</code> <code>2. wrangler 再deploy</code> <code>3. GSC sitemap提出</code><br>
+    <code>4. CF Pages カスタムドメイン設定</code> <code>5. SSL証明書発行確認</code><br>
+    <code>6. index status 監視cron 起票</code> <code>7. 24h後 初期データ報告HTML</code>
+  </p>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline">
+  <h2>想定タイムライン</h2>
+  <ol>
+    <li><b>今</b>: NOYUTO 3手順実行 (3分)</li>
+    <li><b>+5分</b>: pochi が測定ID差込 deploy 完了 → ex-dekasegi.pages.dev で GA計測開始</li>
+    <li><b>+30分〜2時間</b>: DNS伝播 → ex-dekasegi.jp で本番アクセス可能</li>
+    <li><b>+24時間</b>: GA4 初期データ蓄積 / GSC でインデックス申請受理</li>
+    <li><b>+7日</b>: 「風俗 出稼ぎ + 地域名」ロングテール露出開始の見込</li>
+    <li><b>+30日</b>: GSC で初期 click データ確認 → 次フェーズ意思決定</li>
+  </ol>
+</section>
+
+<footer>
+  動員手順書 v1 ・ 2026-05-13 ・ pochi 作成<br>
+  WSL: /home/ozawakiryu0902/projects/ex-dekasegi/reports/noyuto-action-guide-2026-05-13.html<br>
+  GitHub: <a href="https://github.com/office-vonds/ex-dekasegi/blob/main/reports/noyuto-action-guide-2026-05-13.html">office-vonds/ex-dekasegi</a>
+</footer>
+
+</div>
+</body>
+</html>
