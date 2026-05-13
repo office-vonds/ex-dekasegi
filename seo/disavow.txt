@@ -1,0 +1,25 @@
+# ex-dekasegi.jp Disavow Links File
+# Generated: 2026-05-13
+# Source: LINK Analytics 全日本SEO協会 / Majestic backlink dump
+# Total backlinks analyzed: 14 / Disavow targets: 12 (86%)
+# Retained: f.fdol.jp (related business - exgroup kizuna image link)
+#
+# Rationale:
+# - All disavowed domains are URL shorteners or auto-generated "domain report" pages
+# - TrustFlow=0 or =1 only / NoFollow=1 majority
+# - Pattern: same /share/50016 + /share/50017 IDs across multiple spam farms
+#   indicates automated mass link injection (likely link farm network)
+# - These links poison E-E-A-T signals and must be disavowed before content expansion
+
+domain:newsblogsports.site
+domain:buzzshrink.website
+domain:urls-shortener.eu
+domain:bye.fyi
+domain:shortenurls.eu
+domain:sites.jake.eu
+domain:quero.party
+domain:creativeposts.top
+domain:domains.com.bz
+domain:linkspreader.com
+domain:globalnetwork.in
+domain:japansitedirectory.com
