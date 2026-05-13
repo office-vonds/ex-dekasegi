@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ex-dekasegi.jp 完遂報告 2026-05-13</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Sans','Yu Gothic','Meiryo',sans-serif;line-height:1.85;color:#222;background:#fff8fb;}
+.wrap{max-width:820px;margin:0 auto;padding:32px 24px 80px;}
+header{padding:24px 0 28px;border-bottom:3px solid #ff99cc;margin-bottom:32px;text-align:center;}
+header h1{font-size:1.7rem;color:#222;font-weight:900;}
+header .sub{margin-top:10px;color:#888;font-size:0.95em;}
+.badge{display:inline-block;background:#ff0084;color:#fff;padding:4px 14px;border-radius:14px;font-size:0.8em;font-weight:700;margin-bottom:14px;}
+section{background:#fff;border-left:6px solid #ff99cc;border-radius:0 10px 10px 0;padding:22px 28px;margin:24px 0;}
+section h2{font-size:1.25rem;color:#ff0084;margin-bottom:14px;font-weight:900;}
+section h3{font-size:1.05rem;margin:18px 0 8px;color:#444;}
+ul{margin:8px 0 8px 1.4em;}
+li{margin:5px 0;}
+.ok{color:#0a7c3a;font-weight:700;}
+.note{background:#fff8e8;border-left:4px solid #ffb84d;padding:14px 18px;margin:14px 0;font-size:0.94em;}
+.note strong{color:#cc7700;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95em;}
+th,td{border:1px solid #ffd6e7;padding:10px 12px;text-align:left;}
+th{background:#fff0f7;font-weight:700;}
+.tasks-left{background:#f8f6ff;border-left:4px solid #8b5cf6;padding:18px 22px;margin:14px 0;}
+.tasks-left strong{color:#5b21b6;}
+.url{font-family:monospace;font-size:0.9em;color:#444;background:#f6f6f8;padding:2px 6px;border-radius:4px;}
+footer{text-align:center;padding-top:24px;margin-top:36px;border-top:1px solid #ffd6e7;color:#888;font-size:0.88em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="badge">完遂報告</div>
+  <h1>EX出稼ぎ サイトの「全部仕上げ」が終わりました</h1>
+  <div class="sub">2026年5月13日 22:50 JST 時点 / 担当: ポチ</div>
+</header>
+
+<section>
+  <h2>NOYUTO に伝えたいこと（要点）</h2>
+  <p><strong>EX出稼ぎ サイト (ex-dekasegi.jp) の中身を「もうこれ以上やることがない」状態まで仕上げました。</strong></p>
+  <ul>
+    <li>専門の長い記事は <span class="ok">5本そろいました</span>（最初の計画通り）</li>
+    <li>サイトの構造を整える作業（地図ファイル・パンくず・ページの正規アドレス）も <span class="ok">全部仕上がり</span></li>
+    <li>サイト全体の <span class="ok">9つのアドレスがすべて正常に開きます</span>（遠回りされる無駄もゼロ）</li>
+    <li>Google に「このサイトは元気です」と伝える材料も <span class="ok">完備</span></li>
+  </ul>
+  <p>あとは Google が新しい記事を見つけて検索結果に反映するまで待つだけです。</p>
+</section>
+
+<section>
+  <h2>今回 新しく仕上がったもの</h2>
+
+  <h3>① 5本目の新記事 を公開しました</h3>
+  <p>東京・大阪・名古屋・福岡・札幌・甲府の6つの街について「客層・稼ぎの相場・寮の事情・治安・滞在の目安」を整理した長い記事です。約6,500字。</p>
+  <p>アドレス: <span class="url">https://ex-dekasegi.jp/articles/shuyou-toshi-dekasegi-jijou-2026</span></p>
+  <p>甲府のセクションには NOYUTO が22年見てきた地元の独自情報を匿名で盛り込んでいます。</p>
+
+  <h3>② Google が記事を「綺麗に表示する」ための仕掛けを全記事に追加</h3>
+  <p>Google の検索結果ページで「サイト名 &gt; 記事一覧 &gt; 記事名」のような順序リンクが表示されるようにしました（パンくずという仕組み）。全6ページに対応。</p>
+
+  <h3>③ 記事の正規アドレスを統一しました</h3>
+  <p>これまで Google にサイト地図を渡したとき「.html」付きアドレスを渡していたのですが、Cloudflare（サーバー）の仕組み上、それだと一度別アドレスへ転送される構造になっていました。</p>
+  <p>転送が入ると Google の評価が落ちるので、地図・記事・関連情報すべてを「.html なしのアドレス」に統一しました。これでロボットがまっすぐ記事を取りに来ます。</p>
+
+  <h3>④ 記事同士の繋がり（内部リンク）を完成</h3>
+  <p>5本の記事すべてが互いに行き来できる構造にしました。「他の記事も読みたい」と思った読者がスムーズに回遊できます。</p>
+</section>
+
+<section>
+  <h2>今のサイトの状態（全9アドレス）</h2>
+  <table>
+    <tr><th>場所</th><th>状態</th></tr>
+    <tr><td>トップページ</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事一覧ページ</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事1 完全ガイド</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事2 Q&amp;A 50選</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事3 悪質店15サイン</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事4 安全店選び5法則</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>記事5 主要都市の事情（新規）</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>サイト地図 (sitemap)</td><td class="ok">正常 (200)</td></tr>
+    <tr><td>ロボット案内 (robots)</td><td class="ok">正常 (200)</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>NOYUTO に残っている作業（ポチが代行できない 60秒〜数分）</h2>
+  <div class="tasks-left">
+    <p><strong>① Google サーチコンソール で「除外したい変なリンク」を登録（約60秒）</strong></p>
+    <p>5月12日に「ロボットドクター」で見つけた12個の海外スパムリンクのリスト（ファイル名: seo/disavow.txt）を、Google の disavow ツール画面にアップロードする作業です。</p>
+    <p>アップロード画面: <span class="url">https://search.google.com/search-console/disavow-links</span></p>
+  </div>
+  <div class="tasks-left">
+    <p><strong>② Google サーチコンソール で新記事5を「URL検査」（任意・数分）</strong></p>
+    <p>新しく公開した記事5のアドレスを Google に「すぐ見に来て」と頼む手続きです。やらなくても Google は自動で見つけますが、やれば数日早く検索結果に出ます。</p>
+  </div>
+  <p style="margin-top:14px;">この2つ以外は、ポチ側で全部やり終えています。NOYUTO がやる作業は <strong>合計でも10分以内</strong>です。</p>
+</section>
+
+<section>
+  <h2>使った時間と材料</h2>
+  <ul>
+    <li>所要時間: 約60分（22時30分 → 22時50分頃に完遂）</li>
+    <li>追加で書いたコード: 1記事（約20KB）+ 全6ページの構造化データ追加</li>
+    <li>Cloudflare へのアップロード: 2回（記事追加 → 構造整理）</li>
+    <li>GitHub への保存: 2件のコミット（f39bfd7, f12d5ad）</li>
+    <li>NOYUTO を呼んだ回数: <strong>ゼロ</strong>（ルール15遵守）</li>
+  </ul>
+</section>
+
+<section>
+  <h2>これで「もうやることがない」と言える理由</h2>
+  <p>5月12日に立てた計画書では「5本の長い記事を書く」「Google に正しい構造で見せる」が目標でした。今日その両方が完遂しました。</p>
+  <ul>
+    <li>計画通り <strong>5本そろった</strong></li>
+    <li>サイト地図と記事の正規アドレスが <strong>完全に揃った</strong></li>
+    <li>Google が読み取る材料（構造化データ）が <strong>11個すべて正常</strong></li>
+    <li>全URL が <strong>遠回りなしで開く</strong></li>
+  </ul>
+  <p>これ以降は「Google が記事を発見 → 検索順位が動く」を待つフェーズです。順位観測は TORA に引き継ぎます。</p>
+</section>
+
+<footer>
+  EX出稼ぎ プロジェクト / 担当: ポチ / 完遂日時: 2026-05-13 22:50 JST<br>
+  ファイル保管場所:<br>
+  ・このレポート: /home/ozawakiryu0902/projects/ex-dekasegi/reports/ex-dekasegi-goal-complete-2026-05-13.html<br>
+  ・サイト本体: /home/ozawakiryu0902/projects/ex-dekasegi/public/
+</footer>
+
+</div>
+</body>
+</html>
