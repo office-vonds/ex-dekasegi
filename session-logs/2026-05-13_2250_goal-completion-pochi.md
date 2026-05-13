@@ -26,8 +26,8 @@ NOYUTO 直命: 「ex-dekasegi.jp プロジェクトをもうこれ以上他に�
 ゼロ件 (Rule#15 遵守)
 
 ## 残 (ポチ手出し不可)
-- NOYUTO disavow upload (60秒手作業)
-- GSC URL検査リクエスト (代替: 自動crawl 待ち)
+- ~~NOYUTO disavow upload~~ → **5/13 NOYUTO 既に実施済 (23:00 後追い訂正)**
+- GSC URL検査リクエスト (任意・自動 crawl 待ち代替可)
 - TORA 引き渡し「風俗 出稼ぎ」KW順位観測 cron
 
 詳細: VONDS リポジトリ session-logs/2026-05-13_2250_pochi-ex-dekasegi-goal-completion.md
