@@ -32,7 +32,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"></noscript>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -48,23 +48,42 @@ if(__GA_ID__){
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:#222;background:#fff8fb;}
+body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.85;color:#222;background:#FDF9F6;}
 .wrap{max-width:780px;margin:0 auto;padding:32px 22px 80px;}
-header{padding:20px 0 28px;border-bottom:3px solid #ff99cc;margin-bottom:32px;}
+header{padding:20px 0 28px;border-bottom:3px solid #E1A9B6;margin-bottom:32px;}
 header .crumb{font-size:0.85em;color:#888;margin-bottom:12px;}
-header .crumb a{color:#ff0084;text-decoration:none;}
+header .crumb a{color:#B23A5F;text-decoration:none;}
 header h1{font-size:1.85rem;line-height:1.45;color:#222;font-weight:900;}
 header h1 small{display:block;font-size:0.55em;color:#666;margin-top:8px;font-weight:500;}
-.article{background:#fff;border-left:6px solid #ff99cc;border-radius:0 8px 8px 0;padding:20px 24px;margin:18px 0;}
+.article{background:#fff;border-left:6px solid #E1A9B6;border-radius:0 8px 8px 0;padding:20px 24px;margin:18px 0;}
 .article h2{font-size:1.2rem;color:#222;margin-bottom:8px;}
 .article h2 a{color:#222;text-decoration:none;}
-.article h2 a:hover{color:#ff0084;}
+.article h2 a:hover{color:#B23A5F;}
 .article .meta{font-size:0.85em;color:#888;margin-bottom:10px;}
 .article p{margin-bottom:12px;}
-.article .read-more{color:#ff0084;font-weight:700;text-decoration:none;}
+.article .read-more{color:#B23A5F;font-weight:700;text-decoration:none;}
 .coming{opacity:0.6;}
-footer{margin-top:48px;padding-top:24px;border-top:2px solid #f0c0d8;font-size:0.88em;color:#888;text-align:center;}
-footer a{color:#ff0084;text-decoration:none;}
+footer{margin-top:48px;padding-top:24px;border-top:2px solid #EBD5D9;font-size:0.88em;color:#888;text-align:center;}
+footer a{color:#B23A5F;text-decoration:none;}
+
+/* ===== NOYUTO品質基準 v1.0 共有コンポーネント (2026-05-17 再構築) ===== */
+::selection{background:#F3DAD7;color:#2A1C22}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #B23A5F;outline-offset:2px;border-radius:3px}
+img{max-width:100%;height:auto}
+.eeat{background:#fff;border:1px solid #EBD5D9;border-radius:14px;padding:22px 24px;margin:40px 0 0;display:flex;gap:18px;align-items:flex-start}
+.eeat .ava{flex:0 0 60px}
+.eeat .ava svg{width:60px;height:60px;display:block}
+.eeat .body{flex:1;min-width:0}
+.eeat .nm{font-weight:900;color:#2A1C22;font-size:1rem;margin:0 0 2px}
+.eeat .rl{font-size:0.8rem;color:#9C5468;font-weight:700;margin:0 0 10px}
+.eeat .bio{font-size:0.9rem;color:#6E5860;line-height:1.85;margin:0}
+.eeat .coi{margin-top:10px;font-size:0.78rem;color:#8a7680;line-height:1.7}
+.disclaimer{background:#FBF3E3;border:1px solid #E4C36A;border-radius:12px;padding:14px 20px;margin:28px 0 0;font-size:0.8rem;color:#6B5326;line-height:1.85}
+.disclaimer b{color:#9A3324}
+.figcap{font-size:0.78rem;color:#9C5468;text-align:center;margin:-8px 0 22px;font-weight:700;letter-spacing:.02em}
+.updated{font-size:0.8rem;color:#8a7680;margin-top:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:600px){.eeat{flex-direction:column;gap:12px}}
 </style>
 </head>
 <body>
@@ -118,6 +137,9 @@ footer a{color:#ff0084;text-decoration:none;}
 <a class="read-more" href="/articles/shuyou-toshi-dekasegi-jijou-2026.html">続きを読む →</a>
 </div>
 
+<div class="disclaimer">
+  <b>※</b> 当サイトは合同会社UNRYUTOが運営する、出稼ぎ当事者の判断材料を目的とした情報メディアです。特定店舗の紹介斡旋は行いません。改正風営法・職業安定法第63条2号・景品表示法を遵守。18歳未満の閲覧・利用はできません。最終更新: 2026年5月17日
+</div>
 <footer>
 <a href="/">トップに戻る</a><br>
 © 2026 EX出稼ぎ
