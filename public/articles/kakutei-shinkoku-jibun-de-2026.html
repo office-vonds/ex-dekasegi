@@ -145,6 +145,18 @@ img{max-width:100%;height:auto}
 @media (max-width:600px){header h1{font-size:1.4rem;}h2.section{font-size:1.18rem;}.eeat{flex-direction:column;gap:12px}}
 .hero-fig{margin:0 0 30px}.hero-fig img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid #EBD5D9;object-fit:cover;aspect-ratio:1200/640;max-height:400px}@media(max-width:600px){.hero-fig img{border-radius:10px;max-height:230px}}
 .sec-fig{margin:36px 0}.sec-fig img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid #EBD5D9;object-fit:cover;aspect-ratio:16/10;max-height:360px}.sec-fig figcaption{font-size:.78rem;color:#9C5468;text-align:center;margin-top:8px;font-weight:700;line-height:1.6}@media(max-width:600px){.sec-fig img{max-height:210px}}
+.tldr{background:#fff;border:2px solid #B23A5F;border-radius:14px;padding:22px 24px;margin:0 0 30px}
+.tldr h2{font-size:1.1rem;color:#B23A5F;margin:0 0 12px;border:none;padding:0;background:none}
+.tldr ul{margin:0;padding:0;list-style:none}
+.tldr li{position:relative;padding:9px 0 9px 28px;border-bottom:1px dashed #EBD5D9;font-size:.96rem;line-height:1.8}
+.tldr li:last-of-type{border-bottom:none}
+.tldr li::before{content:"\2713";position:absolute;left:0;top:9px;color:#B23A5F;font-weight:900}
+.digest{margin:34px 0 10px}
+.digest h2{font-size:1.12rem;color:#B23A5F;background:#F7EAEC;border-left:6px solid #B23A5F;border-radius:8px;padding:10px 16px;margin:0 0 16px}
+.digest-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.dcard{background:#fff;border:1px solid #EBD5D9;border-radius:12px;padding:14px;font-size:.85rem;line-height:1.65;color:#2A1C22}
+.dcard .ic{font-size:1.5rem;display:block;margin-bottom:6px}
+.dcard b{color:#B23A5F;display:block;font-size:.78rem;margin-bottom:5px}
 </style>
 </head>
 <body>
@@ -157,6 +169,18 @@ img{max-width:100%;height:auto}
 <div class="meta">公開: 2026年5月17日 / 最終更新: 2026年5月17日 / 著者: ＥＸ出稼ぎ編集部 編集長（2003年〜業界観察）</div>
 </header>
 <figure class="hero-fig"><img src="/assets/hero-kakutei.webp" width="1200" height="799" alt="ノートと電卓とコーヒーのある机——確定申告を自分でやる" fetchpriority="high" decoding="async"></figure>
+
+<section class="tldr" aria-label="この記事の結論">
+<h2>⏱ この記事の結論（30秒で読める要約）</h2>
+<ul>
+<li>見るのは「売上」でなく<b>所得（売上−経費）</b>。出稼ぎ・夜職一本なら所得48万円前後、昼職と掛け持ちは夜職所得20万円超が申告の目安（最終は国税庁で確認）。</li>
+<li><b>記録ゼロでも詰まない。</b>今日から「日付・店・受取額・天引き」をスマホにメモ。過去分は通帳・店のLINE・出勤履歴で復元できる。</li>
+<li>家族バレは申告でなく<b>住民税の通知</b>経由。昼職掛け持ちは住民税を「自分で納付（普通徴収）」に。</li>
+<li>売上が大きくなく経費がシンプルなら<b>税理士は不要</b>。国税庁サイトでスマホ完結。複数年の無申告・税務署から連絡済みは税理士へ。</li>
+<li>無申告のまま卒業すると、住宅ローン・結婚・独立で詰む。<b>確定申告は「業界の外に出る通行証」</b>。</li>
+</ul>
+<p style="margin:14px 0 0;font-size:.84rem;color:#6E5860">↓ 急がない人向けに、以下で「なぜ・いくら・どうやって」を一つずつ解説します。</p>
+</section>
 
 <p class="lead">
 結論から書きます。<b>出稼ぎ・夜職の確定申告は、売上がそれほど大きくなく経費がシンプルなら、税理士に払わなくても自分でできます。</b> 国税庁のサイトがスマホで完結します。本当に怖いのは「やり方が難しいこと」ではなく、<b>無記録のまま数年放置して、ある日まとめて詰むこと</b>です。この記事は、22年この業界を見てきた立場で、どの嬢が自分でやれて、どの嬢は専門家に相談すべきか、その判断基準まで含めて書きます。
@@ -175,6 +199,20 @@ img{max-width:100%;height:auto}
   <li><a href="#ch8">第8章 無申告のまま卒業しようとして詰む構造</a></li>
 </ol>
 </nav>
+<section class="digest" aria-label="60秒サマリー">
+<h2>📺 60秒サマリー — 8つの要点だけ先に</h2>
+<div class="digest-cards">
+<div class="dcard"><span class="ic">📰</span><b>第1章</b>税理士の記事は「自分でやる手順」だけ出さない。利益相反だから。</div>
+<div class="dcard"><span class="ic">📊</span><b>第2章</b>「売上」でなく「所得」で判定。経費を積めば申告所得は下がる。</div>
+<div class="dcard"><span class="ic">📝</span><b>第3章</b>記録ゼロでも今日から付ければ間に合う。過去は復元できる。</div>
+<div class="dcard"><span class="ic">🧾</span><b>第4章</b>経費は「仕事のためか」。衣装・コスメ・交通・寮費自己負担分。</div>
+<div class="dcard"><span class="ic">🏠</span><b>第5章</b>家族バレは住民税通知が原因。掛け持ちは「自分で納付」。</div>
+<div class="dcard"><span class="ic">📱</span><b>第6章</b>国税庁サイトでスマホ完結。5ステップで出せる。</div>
+<div class="dcard"><span class="ic">⚖️</span><b>第7章</b>シンプルなら自分で。複数年無申告・税務署連絡済みは税理士へ。</div>
+<div class="dcard"><span class="ic">🚪</span><b>第8章</b>無申告のまま卒業は詰む。申告は外に出る通行証。</div>
+</div>
+</section>
+
 
 <div class="callout">
 <div class="callout-title">この記事の立場（最初に正直に）</div>
@@ -212,6 +250,8 @@ img{max-width:100%;height:auto}
 </p>
 
 <h2 class="section" id="ch3">第3章 日払い現金の記録がない人が、今日からやること</h2>
+<figure class="sec-fig"><img src="/assets/sk-kiroku.webp" width="1024" height="1024" alt="使い古したノートと小銭——記録は完璧でなくていい。今日から付け始めることが全て" loading="lazy" decoding="async"><figcaption>使い古したノートと小銭——記録は完璧でなくていい。今日から付け始めることが全て</figcaption></figure>
+
 <p>
 出稼ぎはほぼ100%、日払いの現金です。当日の売上から店の取り分・寮費・送迎・罰金を引かれた残りを、その日に手渡しでもらう。だから<b>「いくら稼いだか」の記録が一切残っていない人が大多数</b>です。これが確定申告で詰む最大の原因です。
 </p>
@@ -228,6 +268,8 @@ img{max-width:100%;height:auto}
 </p>
 
 <h2 class="section" id="ch4">第4章 経費はどこまで認められるのか</h2>
+<figure class="sec-fig"><img src="/assets/sk-keihi.webp" width="1024" height="1024" alt="レシート・コスメ・交通費を仕分けた小箱——「仕事のためか」で経費は決まる" loading="lazy" decoding="async"><figcaption>レシート・コスメ・交通費を仕分けた小箱——「仕事のためか」で経費は決まる</figcaption></figure>
+
 <p>
 経費の考え方はシンプルです。<b>「その仕事のために使ったお金か」</b>。これだけです。仕事専用のものほど通りやすく、私生活と兼用のものは「仕事で使った割合」で按分します。現場でよく挙がるものを、通りやすさの感覚と一緒に並べます（最終判断は税務署・税理士で確認してください）。
 </p>
@@ -245,6 +287,8 @@ img{max-width:100%;height:auto}
 </p>
 
 <h2 class="section" id="ch5">第5章 住民税で家族・同居人にバレない出し方</h2>
+<figure class="sec-fig"><img src="/assets/sk-juminzei.webp" width="1024" height="1024" alt="玄関に置かれた開封済みの通知——バレるのは申告でなく住民税の通知から" loading="lazy" decoding="async"><figcaption>玄関に置かれた開封済みの通知——バレるのは申告でなく住民税の通知から</figcaption></figure>
+
 <p>
 「申告したら家族にバレる」と思っている人が多いですが、正確には<b>申告そのものではなく、住民税の通知でバレる</b>のがほとんどです。経路を分けて対策します。
 </p>
@@ -258,6 +302,8 @@ img{max-width:100%;height:auto}
 </div>
 
 <h2 class="section" id="ch6">第6章 自分でやる5ステップ（国税庁サイト）</h2>
+<figure class="sec-fig"><img src="/assets/sk-step.webp" width="1024" height="1024" alt="机の上のスマホとペンとお茶——国税庁サイトはスマホだけで完結する" loading="lazy" decoding="async"><figcaption>机の上のスマホとペンとお茶——国税庁サイトはスマホだけで完結する</figcaption></figure>
+
 <p>
 ここが、税理士記事が出さない実際の部分です。スマホだけで完結します。
 </p>
@@ -288,6 +334,8 @@ img{max-width:100%;height:auto}
 </p>
 
 <h2 class="section" id="ch8">第8章 無申告のまま卒業しようとして詰む構造</h2>
+<figure class="sec-fig"><img src="/assets/sk-sotsugyo.webp" width="1024" height="1024" alt="光の差す扉とスーツケース——確定申告は業界の外に出るための通行証" loading="lazy" decoding="async"><figcaption>光の差す扉とスーツケース——確定申告は業界の外に出るための通行証</figcaption></figure>
+
 <p>
 最後に、一番伝えたいことを書きます。出稼ぎを「あと少しで卒業するから」と無申告のまま続け、いざ昼職や結婚や独立に移ろうとした瞬間に詰む人を、22年で何人も見てきました。
 </p>
