@@ -86,7 +86,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;900&display=swap"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap"></noscript>
 <!-- GA4 (本番ID: G-90PQNHWTLC ・absent host では非読込) -->
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -115,7 +115,7 @@ if(__GA_ID__){
 }
 html{scroll-behavior:smooth}
 body{
-  font-family:"M PLUS Rounded 1c","Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
   background:var(--bg);
   color:var(--ink);
   line-height:1.75;
@@ -143,31 +143,22 @@ a:hover{color:var(--pink-accent)}
 }
 .logo small{display:block;font-size:11px;color:var(--ink-soft);font-weight:500;margin-top:2px}
 .nav-cta{
-  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  background:var(--pink-dark);
   color:#fff;padding:10px 20px;border-radius:999px;font-weight:700;font-size:13px;
-  box-shadow:0 4px 14px rgba(140,47,63,0.3);
-  transition:transform 0.15s;
+  box-shadow:0 2px 8px rgba(42,24,32,0.12);
+  transition:background 0.18s,transform 0.18s;
 }
-.nav-cta:hover{transform:translateY(-2px);color:#fff}
+.nav-cta:hover{background:var(--pink-accent);transform:translateY(-1px);color:#fff}
 
 /* ========== HERO ========== */
 .hero{
-  background:linear-gradient(180deg,#F7EAEC 0%,#FDF9F6 100%);
-  padding:60px 20px 80px;
+  background:var(--bg);
+  padding:72px 20px 72px;
   text-align:center;
   position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
 }
-.hero::before{
-  content:"";position:absolute;top:-50px;right:-50px;
-  width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(180,138,150,0.4),transparent 70%);
-}
-.hero::after{
-  content:"";position:absolute;bottom:-80px;left:-60px;
-  width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle,rgba(156,84,104,0.25),transparent 70%);
-}
-.hero .inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
+.hero .inner{max-width:820px;margin:0 auto;position:relative;z-index:1}
 .hero h1{
   font-size:clamp(28px,5vw,44px);
   font-weight:900;line-height:1.4;
@@ -190,14 +181,14 @@ a:hover{color:var(--pink-accent)}
   display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
 }
 .btn-primary{
-  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  background:var(--pink-dark);
   color:#fff;padding:16px 36px;border-radius:999px;
-  font-weight:900;font-size:16px;
-  box-shadow:0 8px 24px rgba(140,47,63,0.35);
-  transition:transform 0.15s,box-shadow 0.15s;
+  font-weight:800;font-size:16px;letter-spacing:0.02em;
+  box-shadow:0 4px 14px rgba(42,24,32,0.16);
+  transition:background 0.18s,transform 0.18s,box-shadow 0.18s;
   border:none;cursor:pointer;
 }
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(140,47,63,0.45);color:#fff}
+.btn-primary:hover{background:var(--pink-accent);transform:translateY(-2px);box-shadow:0 8px 22px rgba(42,24,32,0.22);color:#fff}
 .btn-secondary{
   background:#fff;color:var(--pink-dark);padding:16px 36px;border-radius:999px;
   font-weight:700;font-size:16px;border:2px solid var(--pink);
@@ -250,7 +241,7 @@ section.block .inner{max-width:1100px;margin:0 auto}
 .problem-card p{font-size:14px;color:var(--ink-soft)}
 
 /* ========== SOLUTION (8 sources) ========== */
-.solution{background:linear-gradient(180deg,#fff,#F7EAEC 100%)}
+.solution{background:var(--pink-light)}
 .sol-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;
 }
@@ -338,7 +329,7 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
 .tweet-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .tweet-avatar{
   width:44px;height:44px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+  background:var(--pink-dark);
   display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;
 }
 .tweet-name{font-weight:700;font-size:14px}
@@ -353,9 +344,9 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
 .chat-fab{
   position:fixed;bottom:24px;right:24px;z-index:200;
   width:64px;height:64px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  background:var(--pink-dark);
   color:#fff;border:none;cursor:pointer;
-  box-shadow:0 10px 30px rgba(140,47,63,0.45);
+  box-shadow:0 8px 24px rgba(42,24,32,0.28);
   font-size:28px;display:flex;align-items:center;justify-content:center;
   transition:transform 0.2s;
 }
@@ -377,7 +368,7 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
 }
 .chat-window.open{display:flex}
 .chat-header{
-  background:linear-gradient(135deg,var(--pink-dark),var(--pink));
+  background:var(--pink-dark);
   color:#fff;padding:16px 20px;
   display:flex;align-items:center;justify-content:space-between;
 }
@@ -586,7 +577,7 @@ img{max-width:100%;height:auto}
     </div>
     <div class="tweet-preview" style="margin-top:18px;background:#FBF0EE;border-color:#D98AA0">
       <div class="tweet-head">
-        <div class="tweet-avatar" style="background:linear-gradient(135deg,#C25C72,#8C2F3F)">M</div>
+        <div class="tweet-avatar" style="background:#8C2F3F">M</div>
         <div>
           <div class="tweet-name">みさき（27・関西在住）</div>
           <div class="tweet-meta">5 時間前 ・ ＥＸ お悩み bot</div>
@@ -1026,7 +1017,7 @@ img{max-width:100%;height:auto}
     const all = [...userTweets, ...SEED];
     feed.innerHTML = all.map(t=>{
       const dangerStyle = t.danger ? 'background:#FBF0EE;border-color:#D98AA0' : '';
-      const avatarStyle = t.danger ? 'background:linear-gradient(135deg,#C25C72,#8C2F3F)' : '';
+      const avatarStyle = t.danger ? 'background:#8C2F3F' : '';
       const initial = (t.name||'?').charAt(0);
       const tagsHTML = (t.tags||[]).map(tag=>{
         const isWarning = ['注意','求人と違う','罰金あり'].includes(tag);
