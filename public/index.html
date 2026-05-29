@@ -281,12 +281,12 @@ section.block .inner{max-width:1100px;margin:0 auto}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;
 }
 .sol-card{
-  background:#fff;border-radius:16px;padding:24px 20px;
-  border-top:4px solid var(--pink);
-  box-shadow:0 4px 16px rgba(180,138,150,0.15);
-  transition:transform 0.2s;
+  background:#fff;border-radius:6px;padding:26px 22px;
+  border-top:3px solid var(--pink-dark);
+  box-shadow:0 2px 14px rgba(42,24,32,0.06);
+  transition:transform 0.2s,box-shadow 0.2s;
 }
-.sol-card:hover{transform:translateY(-4px)}
+.sol-card:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(42,24,32,0.10)}
 .sol-card .num{
   display:inline-block;background:var(--pink-dark);color:#fff;
   width:32px;height:32px;border-radius:50%;text-align:center;line-height:32px;
@@ -489,19 +489,19 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
 
 /* ===== NOYUTO品質基準 v1.0 共有コンポーネント (2026-05-17 再構築) ===== */
 ::selection{background:#F3DAD7;color:#2A1C22}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #B23A5F;outline-offset:2px;border-radius:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #6E1F32;outline-offset:2px;border-radius:3px}
 img{max-width:100%;height:auto}
 .eeat{background:#fff;border:1px solid #EBD5D9;border-radius:14px;padding:22px 24px;margin:40px 0 0;display:flex;gap:18px;align-items:flex-start}
 .eeat .ava{flex:0 0 60px}
 .eeat .ava svg{width:60px;height:60px;display:block}
 .eeat .body{flex:1;min-width:0}
 .eeat .nm{font-weight:900;color:#2A1C22;font-size:1rem;margin:0 0 2px}
-.eeat .rl{font-size:0.8rem;color:#9C5468;font-weight:700;margin:0 0 10px}
+.eeat .rl{font-size:0.8rem;color:#8C2F3F;font-weight:700;margin:0 0 10px}
 .eeat .bio{font-size:0.9rem;color:#6E5860;line-height:1.85;margin:0}
 .eeat .coi{margin-top:10px;font-size:0.78rem;color:#8a7680;line-height:1.7}
 .disclaimer{background:#FBF3E3;border:1px solid #E4C36A;border-radius:12px;padding:14px 20px;margin:28px 0 0;font-size:0.8rem;color:#6B5326;line-height:1.85}
 .disclaimer b{color:#9A3324}
-.figcap{font-size:0.78rem;color:#9C5468;text-align:center;margin:-8px 0 22px;font-weight:700;letter-spacing:.02em}
+.figcap{font-size:0.78rem;color:#8C2F3F;text-align:center;margin:-8px 0 22px;font-weight:700;letter-spacing:.02em}
 .updated{font-size:0.8rem;color:#8a7680;margin-top:6px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media (max-width:600px){.eeat{flex-direction:column;gap:12px}}
@@ -579,14 +579,14 @@ img{max-width:100%;height:auto}
       <svg viewBox="0 0 560 230" role="img" aria-label="広告の日給と実際の手取りの差を示す棒グラフ。広告10万円に対し、罰金・寮費・天引き後の実手取りは4.6万円という、業界22年の運営が見た典型例。" style="width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:14px">
         <text x="280" y="28" font-family="'Noto Sans JP',sans-serif" font-size="14" font-weight="900" fill="#2a1820" text-anchor="middle">広告「日給10万」と実手取りの差（22年で見た典型例）</text>
         <line x1="70" y1="180" x2="530" y2="180" stroke="#EBD5D9" stroke-width="1.5"/>
-        <rect x="120" y="60" width="90" height="120" rx="4" fill="#E1A9B6"/>
-        <text x="165" y="52" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="900" fill="#9C5468" text-anchor="middle">広告 10.0万</text>
+        <rect x="120" y="60" width="90" height="120" rx="3" fill="#C9647E"/>
+        <text x="165" y="52" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="900" fill="#8C2F3F" text-anchor="middle">広告 10.0万</text>
         <text x="165" y="200" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#5a4651" text-anchor="middle">求人広告の日給</text>
-        <rect x="350" y="125" width="90" height="55" rx="4" fill="#B23A5F"/>
-        <text x="395" y="117" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="900" fill="#B23A5F" text-anchor="middle">実手取り 4.6万</text>
+        <rect x="350" y="125" width="90" height="55" rx="4" fill="#6E1F32"/>
+        <text x="395" y="117" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="900" fill="#6E1F32" text-anchor="middle">実手取り 4.6万</text>
         <text x="395" y="200" font-family="'Noto Sans JP',sans-serif" font-size="12" fill="#5a4651" text-anchor="middle">罰金・寮費・天引き後</text>
-        <path d="M218 90 L344 140" stroke="#9C5468" stroke-width="1.5" stroke-dasharray="4 3"/>
-        <text x="281" y="105" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="700" fill="#9C5468" text-anchor="middle">−54%</text>
+        <path d="M218 90 L344 140" stroke="#8C2F3F" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="281" y="105" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="700" fill="#8C2F3F" text-anchor="middle">−54%</text>
       </svg>
       <figcaption style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:10px">業界22年の運営が実際に見てきた、求人広告と手取りの乖離の典型レンジ（個別店舗・個人の特定を避けるため数値は代表例）。</figcaption>
     </figure>
@@ -874,15 +874,15 @@ img{max-width:100%;height:auto}
         <svg viewBox="0 0 720 120" role="img" aria-label="運営チームの確認できる事実をまとめた図。業界経験22年、延べ相談対応1,500件超、2003年に国内最初期の出稼ぎ専門メディア立ち上げ、ドメイン11年運用、運営法人は合同会社UNRYUTO。" style="width:100%;height:auto;display:block">
           <g font-family="'Noto Sans JP',sans-serif" text-anchor="middle">
             <rect x="6" y="20" width="160" height="84" rx="12" fill="#fff" stroke="#EBD5D9"/>
-            <text x="86" y="58" font-size="26" font-weight="900" fill="#B23A5F">22<tspan font-size="13">年</tspan></text>
+            <text x="86" y="58" font-size="26" font-weight="900" fill="#6E1F32">22<tspan font-size="13">年</tspan></text>
             <text x="86" y="84" font-size="12" fill="#5a4651">業界経験</text>
             <rect x="184" y="20" width="160" height="84" rx="12" fill="#fff" stroke="#EBD5D9"/>
-            <text x="264" y="58" font-size="24" font-weight="900" fill="#B23A5F">1,500<tspan font-size="12">件+</tspan></text>
+            <text x="264" y="58" font-size="24" font-weight="900" fill="#6E1F32">1,500<tspan font-size="12">件+</tspan></text>
             <text x="264" y="84" font-size="12" fill="#5a4651">延べ相談対応</text>
             <rect x="362" y="20" width="160" height="84" rx="12" fill="#fff" stroke="#EBD5D9"/>
-            <text x="442" y="58" font-size="26" font-weight="900" fill="#B23A5F">2003<tspan font-size="12">〜</tspan></text>
+            <text x="442" y="58" font-size="26" font-weight="900" fill="#6E1F32">2003<tspan font-size="12">〜</tspan></text>
             <text x="442" y="84" font-size="12" fill="#5a4651">最初期に立上げ</text>
-            <rect x="540" y="20" width="174" height="84" rx="12" fill="#B23A5F"/>
+            <rect x="540" y="20" width="174" height="84" rx="12" fill="#6E1F32"/>
             <text x="627" y="56" font-size="14" font-weight="900" fill="#fff">合同会社</text>
             <text x="627" y="78" font-size="16" font-weight="900" fill="#fff">UNRYUTO</text>
           </g>
