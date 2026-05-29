@@ -477,6 +477,27 @@ footer .ops{margin-top:14px;font-size:11px;opacity:0.7}
   max-width:1000px;margin:0 auto;
 }
 
+/* ========== GUIDE CARDS (記事サムネ) ========== */
+.guide-cat-label{
+  font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink);
+  margin:40px 0 18px;display:flex;align-items:center;gap:11px;
+}
+.guide-cat-label:first-child{margin-top:0}
+.guide-cat-label::before{content:"";width:4px;height:21px;background:var(--pink-dark);border-radius:2px}
+.guide-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:18px;
+}
+.guide-card{
+  display:flex;flex-direction:column;background:#fff;
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;
+  text-decoration:none;transition:transform .2s,box-shadow .2s;
+}
+.guide-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(42,24,32,0.10)}
+.guide-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--pink-light)}
+.guide-card .gc-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.guide-card .gc-cat{font-size:10.5px;font-weight:700;color:var(--pink-dark);letter-spacing:0.1em}
+.guide-card .gc-title{font-size:13.5px;line-height:1.65;color:var(--ink);font-weight:700;margin:0}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width:640px){
   section.block{padding:48px 16px}
@@ -714,7 +735,7 @@ img{max-width:100%;height:auto}
 </section>
 
 <!-- GUIDE ARTICLES HUB (内部リンク・トピック権威の中核) -->
-<section class="block" id="guides" style="background:#fff">
+<section class="block" id="guides" style="background:var(--pink-light)">
   <div class="inner">
     <div class="section-title">
       <span class="eyebrow">読んでおくべきガイド</span>
@@ -722,40 +743,34 @@ img{max-width:100%;height:auto}
       <p>求人広告が書かない「現場の現実」を、元出稼ぎ嬢が匿名で。あなたの段階に合わせて読んでください。</p>
     </div>
 
-    <div style="display:grid;gap:24px;max-width:920px;margin:8px auto 0">
+    <div style="max-width:1100px;margin:8px auto 0">
 
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--bg)">
-        <h3 style="margin:0 0 12px;color:var(--pink-dark);font-size:17px">① これから出稼ぎを考える人へ（準備）</h3>
-        <ul style="margin:0;padding-left:0;list-style:none;display:grid;gap:10px">
-          <li><a href="/articles/dekasegi-complete-guide-2026" style="color:var(--ink);font-weight:700;text-decoration:none">風俗 出稼ぎ 完全ガイド 2026 — 定義・始め方・収入の仕組み</a></li>
-          <li><a href="/articles/dekasegi-mochimono-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎの持ち物リスト 2026 — 寮タイプ別に本当に要る物・要らない物</a></li>
-          <li><a href="/articles/qa-beginner-50-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎ未経験者向け Q&amp;A 50選 — よく聞かれる不安に全部回答</a></li>
-          <li><a href="/articles/shuyou-toshi-dekasegi-jijou-2026" style="color:var(--ink);font-weight:700;text-decoration:none">主要都市の出稼ぎ事情 — 東京・大阪・名古屋・福岡・札幌・甲府の客層と相場</a></li>
-          <li><a href="/articles/okinawa-dekasegi-2026" style="color:var(--ink);font-weight:700;text-decoration:none">沖縄の出稼ぎ事情 — 客層・相場・ベストシーズンと移動の注意点</a></li>
-        </ul>
+      <div class="guide-cat-label">これから出稼ぎを考える人へ（準備）</div>
+      <div class="guide-grid">
+        <a class="guide-card" href="/articles/dekasegi-complete-guide-2026"><img src="/assets/hero-guide.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">準備</span><p class="gc-title">風俗 出稼ぎ 完全ガイド 2026 — 定義・始め方・収入の仕組み</p></div></a>
+        <a class="guide-card" href="/articles/dekasegi-mochimono-2026"><img src="/assets/sec-mochimono.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">準備</span><p class="gc-title">出稼ぎの持ち物リスト 2026 — 寮タイプ別に本当に要る物・要らない物</p></div></a>
+        <a class="guide-card" href="/articles/qa-beginner-50-2026"><img src="/assets/sec-guide.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">準備</span><p class="gc-title">出稼ぎ未経験者向け Q&amp;A 50選 — よく聞かれる不安に全部回答</p></div></a>
+        <a class="guide-card" href="/articles/shuyou-toshi-dekasegi-jijou-2026"><img src="/assets/hero-toshi.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">準備</span><p class="gc-title">主要都市の出稼ぎ事情 — 東京・大阪・名古屋・福岡・札幌・甲府の客層と相場</p></div></a>
+        <a class="guide-card" href="/articles/okinawa-dekasegi-2026"><img src="/assets/sec-okinawa.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">準備</span><p class="gc-title">沖縄の出稼ぎ事情 — 客層・相場・ベストシーズンと移動の注意点</p></div></a>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--bg)">
-        <h3 style="margin:0 0 12px;color:var(--pink-dark);font-size:17px">② 安全に稼ぐ（店選び・トラブル回避）</h3>
-        <ul style="margin:0;padding-left:0;list-style:none;display:grid;gap:10px">
-          <li><a href="/articles/anzen-mise-5gensoku-2026" style="color:var(--ink);font-weight:700;text-decoration:none">安全な出稼ぎ先選びの5法則 — 22年で見た店選びの判断基準</a></li>
-          <li><a href="/articles/hoshou-wariware-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎの保証と「保証割れ」の真実 — トータルvs日割り・相場・割れた時の対処</a></li>
-          <li><a href="/articles/akushitsuten-15signs-2026" style="color:var(--ink);font-weight:700;text-decoration:none">悪質店の見分け方 — 危険サイン15（現場目線）</a></li>
-          <li><a href="/articles/kyaku-trouble-mi-wo-mamoru-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎで客から身を守る方法 — 本番強要・盗撮・付きまといの実手口と対処</a></li>
-          <li><a href="/articles/mental-renkin-genjitsu-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎのメンタルと連勤の現実 — 摩耗しないための判断軸</a></li>
-          <li><a href="/articles/jitsuroku-6nin-meian-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎ7日で60万・別の7日で3.5万天引き — 6人の明暗を分けた判断</a></li>
-        </ul>
+      <div class="guide-cat-label">安全に稼ぐ（店選び・トラブル回避）</div>
+      <div class="guide-grid">
+        <a class="guide-card" href="/articles/anzen-mise-5gensoku-2026"><img src="/assets/sec-anzen.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">安全</span><p class="gc-title">安全な出稼ぎ先選びの5法則 — 22年で見た店選びの判断基準</p></div></a>
+        <a class="guide-card" href="/articles/hoshou-wariware-2026"><img src="/assets/sec-hoshou.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">安全</span><p class="gc-title">出稼ぎの保証と「保証割れ」の真実 — トータルvs日割り・相場・割れた時の対処</p></div></a>
+        <a class="guide-card" href="/articles/akushitsuten-15signs-2026"><img src="/assets/sec-akushitsuten.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">安全</span><p class="gc-title">悪質店の見分け方 — 危険サイン15（現場目線）</p></div></a>
+        <a class="guide-card" href="/articles/kyaku-trouble-mi-wo-mamoru-2026"><img src="/assets/sec-jitsuroku.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">安全</span><p class="gc-title">出稼ぎで客から身を守る方法 — 本番強要・盗撮・付きまといの実手口と対処</p></div></a>
+        <a class="guide-card" href="/articles/mental-renkin-genjitsu-2026"><img src="/assets/hero-mental-renkin.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">安全</span><p class="gc-title">出稼ぎのメンタルと連勤の現実 — 摩耗しないための判断軸</p></div></a>
+        <a class="guide-card" href="/articles/jitsuroku-6nin-meian-2026"><img src="/assets/hero-jitsuroku.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">実録</span><p class="gc-title">出稼ぎ7日で60万・別の7日で3.5万天引き — 6人の明暗を分けた判断</p></div></a>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:var(--bg)">
-        <h3 style="margin:0 0 12px;color:var(--pink-dark);font-size:17px">③ お金・税金（確定申告）</h3>
-        <ul style="margin:0;padding-left:0;list-style:none;display:grid;gap:10px">
-          <li><a href="/articles/kakutei-shinkoku-jibun-de-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎ・夜職の確定申告を自分でやる手順 — いくらから・バレ対策・記録がない人の対処</a></li>
-          <li><a href="/articles/shame-nikki-kakikata-dekasegi-2026" style="color:var(--ink);font-weight:700;text-decoration:none">出稼ぎで指名が増える写メ日記の書き方 — 短期勝負で本指名を作る型</a></li>
-          <li><a href="/articles/shame-nikki-torikata-shashin-2026" style="color:var(--ink);font-weight:700;text-decoration:none">指名は写真で決まる — 写メ日記の撮り方・写真の質</a></li>
-          <li><a href="/articles/shame-nikki-reibun-dekasegi-2026" style="color:var(--ink);font-weight:700;text-decoration:none">写メ日記の例文集 — 出稼ぎですぐ使える指名が増える文面</a></li>
-          <li><a href="/articles/guide-shame-nikki-2026" style="color:var(--ink);font-weight:700;text-decoration:none">写メ日記・指名ガイド — 書き方・撮り方・例文まとめ</a></li>
-        </ul>
+      <div class="guide-cat-label">お金・税金／写メ日記で指名を増やす</div>
+      <div class="guide-grid">
+        <a class="guide-card" href="/articles/kakutei-shinkoku-jibun-de-2026"><img src="/assets/hero-kakutei.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">お金・税金</span><p class="gc-title">出稼ぎ・夜職の確定申告を自分でやる手順 — いくらから・バレ対策・記録がない人の対処</p></div></a>
+        <a class="guide-card" href="/articles/shame-nikki-kakikata-dekasegi-2026"><img src="/assets/hero-shameni-kakikata.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">写メ日記</span><p class="gc-title">出稼ぎで指名が増える写メ日記の書き方 — 短期勝負で本指名を作る型</p></div></a>
+        <a class="guide-card" href="/articles/shame-nikki-torikata-shashin-2026"><img src="/assets/hero-shameni-torikata.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">写メ日記</span><p class="gc-title">指名は写真で決まる — 写メ日記の撮り方・写真の質</p></div></a>
+        <a class="guide-card" href="/articles/shame-nikki-reibun-dekasegi-2026"><img src="/assets/hero-shameni-reibun.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">写メ日記</span><p class="gc-title">写メ日記の例文集 — 出稼ぎですぐ使える指名が増える文面</p></div></a>
+        <a class="guide-card" href="/articles/guide-shame-nikki-2026"><img src="/assets/hero-shameni-hub.webp" alt="" loading="lazy" width="320" height="200"><div class="gc-body"><span class="gc-cat">写メ日記</span><p class="gc-title">写メ日記・指名ガイド — 書き方・撮り方・例文まとめ</p></div></a>
       </div>
 
     </div>
