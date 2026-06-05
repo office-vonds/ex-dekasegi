@@ -49,6 +49,13 @@ if(__GA_ID__){const sc=document.createElement('script');sc.async=true;sc.src='ht
 {"@type":"ListItem","position":2,"name":"記事一覧","item":"https://ex-dekasegi.jp/articles/"},
 {"@type":"ListItem","position":3,"name":"出稼ぎのお金・税金 完全ガイド"}]}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"出稼ぎの収入、いくらから確定申告が必要?","acceptedAnswer":{"@type":"Answer","text":"本業なら所得48万円超、昼職がある人は副業所得20万円超が一つの目安です。住民税は別基準なので、少額でも申告が必要な場合があります。"}},
+{"@type":"Question","name":"無申告だとどうなる?","acceptedAnswer":{"@type":"Answer","text":"後から無申告加算税・延滞税が上乗せされます。店への税務調査・口座の動き・住民税の通知で、数年後に判明することがあります。"}},
+{"@type":"Question","name":"家族に住民税でバレない?","acceptedAnswer":{"@type":"Answer","text":"住民税の徴収方法（普通徴収）や扶養の状況で変わります。回避の具体策は確定申告の手順にまとめています。"}},
+{"@type":"Question","name":"領収書をなくした分は経費にできない?","acceptedAnswer":{"@type":"Answer","text":"交通費など領収書が出にくいものは、日付・経路・金額のメモでも記録になります。完璧でなくても残すほど有利です。"}}]}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Noto Sans JP',-apple-system,sans-serif;line-height:1.95;color:#222;background:#FDF9F6;}
@@ -81,7 +88,12 @@ p{margin:0 0 1.3em;}
 footer{margin-top:44px;padding-top:22px;border-top:2px solid #EBD5D9;font-size:0.88em;color:#888;text-align:center;}
 footer a{color:#B23A5F;text-decoration:none;}
 a:focus-visible{outline:2px solid #B23A5F;outline-offset:2px;border-radius:3px}
-@media(max-width:600px){header h1{font-size:1.45rem;}h2.section{font-size:1.2rem;}.eeat{flex-direction:column;gap:12px}}
+.dtable{width:100%;border-collapse:collapse;margin:18px 0;font-size:0.92rem;background:#fff;border-radius:8px;overflow:hidden}
+.dtable th,.dtable td{border:1px solid #EBD5D9;padding:10px 12px;text-align:left;vertical-align:top}
+.dtable th{background:#E1A9B6;color:#222;font-weight:700}
+.dtable td b{color:#B23A5F}
+.faq li{margin:12px 0}
+@media(max-width:600px){header h1{font-size:1.45rem;}h2.section{font-size:1.2rem;}.eeat{flex-direction:column;gap:12px}.dtable{font-size:0.84rem}.dtable th,.dtable td{padding:7px 8px}}
 </style>
 </head>
 <body>
@@ -109,6 +121,50 @@ a:focus-visible{outline:2px solid #B23A5F;outline-offset:2px;border-radius:3px}
 </ul>
 </div>
 <p>※ 税金まわりは制度改正や個別事情で変わります。本ガイドは一般的な情報提供で、具体的な判断は税理士や税務署の窓口でご確認ください。</p>
+
+<h2 class="section">確定申告が必要になるライン（2026年の目安）</h2>
+<p>「いくらから申告が必要か」は、<b>昼職などの給与があるかどうか</b>で変わります。出稼ぎの報酬は店側で源泉徴収されないことが多く、その場合は<b>自分で申告する</b>のが原則です。下表は一般的な目安です（個別判断は税務署・税理士へ）。</p>
+<table class="dtable">
+<thead><tr><th>あなたの状況</th><th>確定申告の目安</th><th>住民税</th></tr></thead>
+<tbody>
+<tr><td>出稼ぎが本業（他に給与なし）</td><td>所得（収入−経費）が<b>基礎控除48万円</b>を超えたら申告義務</td><td>所得税を申告すれば原則連動</td></tr>
+<tr><td>昼職などの給与がある（掛け持ち）</td><td>給与以外の所得が<b>年20万円を超えたら</b>確定申告が必要</td><td>20万円以下でも<b>住民税の申告は別途必要</b></td></tr>
+<tr><td>扶養に入っている</td><td>所得が一定額を超えると扶養から外れる場合がある</td><td>家族あての通知で気づかれることがある（下のFAQ）</td></tr>
+</tbody>
+</table>
+<p>※ 金額・制度は改正され得ます。記載は2026年5月時点の一般的な情報です。手順の詳細は「<a href="/articles/kakutei-shinkoku-jibun-de-2026">確定申告を自分でやる手順</a>」にまとめています。</p>
+
+<h2 class="section">出稼ぎで「経費」にできるもの</h2>
+<p>経費を記録すると、課税対象になる所得（収入−経費）を正しく下げられます。出稼ぎは遠征前提なので、昼職にはない経費が多いのが特徴です。<b>領収書・明細は出発前から残す</b>のが鉄則です。</p>
+<div class="points"><ul>
+<li><b>移動・遠征</b>：新幹線・飛行機・高速バス・現地の交通費。</li>
+<li><b>宿泊・寮</b>：寮費・ホテル代（業務に使った分）。</li>
+<li><b>衣装・装備</b>：ドレス・下着・ヒール・コスメ・ウィッグなど出勤に必要なもの。</li>
+<li><b>美容・身だしなみ</b>：ネイル・まつげ・ヘア・脱毛など仕事に直結する分。</li>
+<li><b>通信・備品</b>：写メ日記や連絡に使うスマホ通信費（按分）・撮影備品。</li>
+</ul></div>
+<p>プライベートと共用のもの（スマホ・家賃など）は、仕事に使った割合（按分）で考えます。迷うものは記録だけ残し、申告時に税理士へ相談すれば取りこぼしません。</p>
+
+<h2 class="section">「総支給」と「手取り」は別物 — お金が削れる順番</h2>
+<p>求人の高収入は<b>総支給</b>であって、手元に残る額ではありません。出稼ぎでは次の順でお金が引かれます。判断を誤ると、同じ売上でも手取りが大きく変わります。</p>
+<table class="dtable">
+<thead><tr><th>段階</th><th>引かれるもの（例）</th></tr></thead>
+<tbody>
+<tr><td>① 店で引かれる</td><td>厚生費・送迎費・寮費・写メ日記／待機ノルマ未達のペナルティ</td></tr>
+<tr><td>② 保証が割れる</td><td>条件（待機時間・出勤数）を外すと保証が満額もらえない</td></tr>
+<tr><td>③ 自分の経費</td><td>遠征交通費・衣装・美容（上記）</td></tr>
+<tr><td>④ 税金</td><td>確定申告での所得税・翌年の住民税</td></tr>
+</tbody>
+</table>
+<p>「いくら稼げるか」ではなく「<b>いくら残るか</b>」で店と日程を選ぶのが、お金を守る考え方です。業種別の実額レンジは「<a href="/articles/dekasegi-ikura-kasegeru-2026">いくら稼げる? 手取りの分解</a>」、保証の仕組みは「<a href="/articles/hoshou-wariware-2026">保証と保証割れ</a>」で分解しています。</p>
+
+<h2 class="section">よくある質問</h2>
+<div class="points"><ul class="faq">
+<li><b>Q. 出稼ぎの収入、いくらから確定申告が必要?</b><br>A. 本業なら所得48万円超、昼職がある人は副業所得20万円超が一つの目安です。住民税は別基準なので、少額でも申告が必要な場合があります。</li>
+<li><b>Q. 無申告だとどうなる?</b><br>A. 後から無申告加算税・延滞税が上乗せされます。店への税務調査・口座の動き・住民税の通知で、数年後に判明することがあります。</li>
+<li><b>Q. 家族に住民税でバレない?</b><br>A. 住民税の徴収方法（普通徴収）や扶養の状況で変わります。回避の具体策は<a href="/articles/kakutei-shinkoku-jibun-de-2026">確定申告の手順</a>にまとめています。</li>
+<li><b>Q. 領収書をなくした分は経費にできない?</b><br>A. 交通費など領収書が出にくいものは、日付・経路・金額のメモでも記録になります。完璧でなくても、残すほど有利です。</li>
+</ul></div>
 
 <h2 class="section">このガイドの記事</h2>
 <div class="cards">
