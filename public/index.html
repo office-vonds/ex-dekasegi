@@ -525,6 +525,14 @@ img{max-width:100%;height:auto}
 .figcap{font-size:0.78rem;color:#C77B97;text-align:center;margin:-8px 0 22px;font-weight:700;letter-spacing:.02em}
 .updated{font-size:0.8rem;color:#8a7680;margin-top:6px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* ===== MOTION (GSAP) ===== */
+body.js-anim .hero .inner > *{opacity:0;transform:translateY(30px)}
+body.js-anim .section-title{opacity:0;transform:translateY(30px)}
+.scroll-hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(255,255,255,0.82);font-size:9.5px;letter-spacing:0.28em;font-weight:600}
+.scroll-hint .line{width:1px;height:50px;background:rgba(255,255,255,0.22);position:relative;overflow:hidden;border-radius:1px}
+.scroll-hint .line::after{content:"";position:absolute;top:-60%;left:0;width:100%;height:60%;background:#fff;animation:scrollDot 1.9s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes scrollDot{0%{top:-60%}55%,100%{top:100%}}
+@media (prefers-reduced-motion:reduce){body.js-anim .hero .inner > *,body.js-anim .section-title{opacity:1!important;transform:none!important}.scroll-hint .line::after{animation:none}}
 @media (max-width:600px){.eeat{flex-direction:column;gap:12px}}
 .hero-band{max-width:1100px;margin:-40px auto 0;padding:0 20px}.hero-band img{width:100%;height:auto;display:block;border-radius:18px;box-shadow:0 10px 30px rgba(140,47,63,0.14);object-fit:cover;aspect-ratio:1200/520;max-height:420px}@media(max-width:640px){.hero-band{margin-top:-20px}.hero-band img{border-radius:12px;max-height:240px}}
 </style>
@@ -555,6 +563,7 @@ img{max-width:100%;height:auto}
     </div>
     <div class="hero-trust"><span>登録不要</span><span>完全無料</span><span>24時間相談OK</span></div>
   </div>
+  <div class="scroll-hint" aria-hidden="true"><span>SCROLL</span><span class="line"></span></div>
 </section>
 
 <!-- TRUST BAR -->
@@ -828,8 +837,8 @@ img{max-width:100%;height:auto}
   <div class="inner" style="max-width:760px;margin:0 auto">
     <h2>「失敗する前に相談してね」<br>嬢を守るために、嬢が作るコミュニティ。</h2>
     <p>2015 年から 11 年、出稼ぎ業界を見続けたチームが運営。<br>登録不要・匿名・無料、ブラウザだけで完結します。</p>
-    <a href="#" class="btn-primary" style="font-size:17px">いますぐ bot に相談する（準備中）</a>
-    <p style="font-size:12px;margin-top:18px;opacity:0.8">※ AI bot は近日公開。電話番号もメールアドレスもアプリインストールも不要です。</p>
+    <a href="#chat-fab" class="btn-primary" style="font-size:17px" onclick="document.getElementById('chat-fab').click();return false;">いますぐ bot に相談する</a>
+    <p style="font-size:12px;margin-top:18px;opacity:0.8">※ 電話番号もメールアドレスもアプリインストールも不要。ブラウザだけで、いますぐ匿名で相談できます。</p>
   </div>
 </section>
 
@@ -1145,5 +1154,55 @@ ${t.text}</div>
   </div>
 </footer>
 
+<!-- ===== MOTION: GSAP + Lenis ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+<script>
+document.body.classList.add('js-anim');
+(function(){
+  // フェイルセーフ: 何が起きてもコンテンツは必ず表示する。
+  // js-anim は hero/見出しを一時的に opacity:0 にするため、JSエラー・CDN失敗・load未発火で
+  // 消えたまま放置されないよう、全経路で必ず js-anim を外す保証を張る。
+  function showAll(){document.body.classList.remove('js-anim');}
+  var safety=setTimeout(showAll,3500); // 最終保険: load未発火/gsap遅延でも3.5秒で必ず表示
+  window.addEventListener('load',function(){
+    try{
+      var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      if(reduce||typeof gsap==='undefined'){clearTimeout(safety);showAll();return;}
+      gsap.registerPlugin(ScrollTrigger);
+      // 慣性スムーススクロール
+      if(typeof Lenis!=='undefined'){
+        var lenis=new Lenis({lerp:0.085,wheelMultiplier:1});
+        function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+        requestAnimationFrame(raf);
+        lenis.on('scroll',ScrollTrigger.update);
+      }
+      // HERO イントロ（順次浮き上がり + 画像スローズーム）
+      gsap.fromTo('.hero-bg',{scale:1.2},{scale:1,duration:2.2,ease:'power2.out'});
+      gsap.to('.hero .inner > *',{opacity:1,y:0,duration:0.95,ease:'power3.out',stagger:0.14,delay:0.25});
+      // HERO 画像パララックス
+      gsap.to('.hero-bg',{yPercent:16,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      // 見出し reveal
+      gsap.utils.toArray('.section-title').forEach(function(el){
+        gsap.to(el,{opacity:1,y:0,duration:0.95,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}});
+      });
+      // カード stagger reveal
+      ['.problem-grid','.guide-grid','.sol-grid','.steps','.tweets-feed'].forEach(function(sel){
+        document.querySelectorAll(sel).forEach(function(grid){
+          gsap.from(grid.children,{y:40,opacity:0,duration:0.75,ease:'power3.out',stagger:0.07,
+            scrollTrigger:{trigger:grid,start:'top 84%'}});
+        });
+      });
+      // tweet-preview / グラフ / 運営box の個別 reveal
+      gsap.utils.toArray('.tweet-preview, .block figure, .community-cta .inner').forEach(function(el){
+        gsap.from(el,{y:40,opacity:0,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}});
+      });
+      ScrollTrigger.refresh();
+      clearTimeout(safety); // 正常初期化できたので保険解除(scroll revealは正常動作)
+    }catch(e){ clearTimeout(safety); showAll(); } // 失敗時は確実に全表示
+  });
+})();
+</script>
 </body>
 </html>
