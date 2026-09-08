@@ -34,7 +34,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const sessionRaw = (body.session_id ?? request.headers.get("cf-connecting-ip") ?? "anon") + "|" + new Date().toISOString().slice(0, 10);
   const sessionHash = await sha256(sessionRaw);
 
-  let reply = "申し訳ございません、現在応答を生成できません。少し時間を置いて再度お試しください。";
+  let reply = "";
 
   try {
     const ai = (await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
@@ -45,9 +45,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       max_tokens: 400,
     })) as { response?: string };
 
-    if (ai?.response) reply = ai.response.trim();
+    if (typeof ai?.response === "string") reply = ai.response.trim();
+    if (!reply) return json({ ok: false, error: "answer_unavailable" }, 503);
   } catch (e) {
-    reply = `応答生成エラー: ${(e as Error).message}`;
+    return json({ ok: false, error: "answer_unavailable" }, 503);
   }
 
   await env.DB.prepare(
@@ -56,5 +57,5 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     .bind(sessionHash, message, reply)
     .run();
 
-  return json({ reply, session_hash: sessionHash });
+  return json({ ok: true, reply });
 };
